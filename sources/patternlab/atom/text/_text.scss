@@ -1,0 +1,23 @@
+/* Text-Related Elements */
+p {
+    margin: 0 0 $space 0;
+}
+
+
+blockquote {
+    font-style    : italic;
+    color         : $color__copy;
+    margin-bottom : $space;
+}
+
+hr {
+    border     : 0;
+    height     : 2px;
+    background : $grey_light;
+    margin     : $space_double 0;
+}
+
+abbr {
+    border-bottom : 1px dotted $grey;
+    cursor        : help;
+}

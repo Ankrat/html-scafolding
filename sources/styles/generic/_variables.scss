@@ -1,0 +1,108 @@
+/*------------------------------------*\
+    $VARIABLES
+\*------------------------------------*/
+
+
+// Changing Susy default global settings
+// Grid
+$susy: (
+    columns           : 12,
+    container         : 1050px,
+    gutters           : 0.5, // 60px columns, 30px gutters
+    global-box-sizing : border-box,
+    debug             : (
+        // image: show-columns
+    )
+);
+
+
+// Base spacing - measures
+$max_width                 : 1170px;
+
+$default_spacing           : 30px;
+//For use with margin
+$space                     : 1em;
+$space_and_half            : $space*1.5;
+$space_double              : $space*2;
+$space_quad                : $space*4;
+$space_half                : $space/2;
+$space_quarter             : $space/4;
+//For use with padding
+$pad                       : 1em;
+$pad_and_half              : $pad*1.5;
+$pad_double                : $pad*2;
+$pad_quad                : $pad*4;
+$pad_half                  : $pad/2;
+$pad_quarter               : $pad/4;
+
+// Colors Starter all projects
+$black                     : #000000;
+$white                     : #FFFFFF;
+$dark                      : #333333;
+$light                     : #EFEFEF;
+$grey                      : #808080;
+$grey_light                : #CCCCCC;
+$grey_lighter              : #DDDDDD;
+
+$brand_facebook            : #03539e;
+$brand_twitter             : #35ccff;
+$brand_linkedin            : #007bb5;
+$brand_youtube             : #bb0000;
+$brand_gplus               : #dd4b39;
+//
+
+// Blackwell specific
+$bw_blue                   : #002D62;
+$bw_blueOver               : #506794;
+$bw_blueAlt                : #00AEEF;
+$bw_red                    : #D31145;
+$bw_green                  : #8DC63F;
+$bw_orange                 : #F57B20;
+
+$color__copy               : #555;
+$color__copyLight          : #777;
+$color__header             : #333;
+
+// Setings with colors above
+$color__primaryAction      : $bw_blueAlt;
+$color__primary__hover     : darken( $color__primaryAction, 10%);
+$color__secondaryAction    : $bw_blue;
+$color__secondary__hover   : $bw_blueOver;
+$color__third__hover       : darken( $bw_orange, 5%);
+$color__promoBadge         : #D21145;
+
+$color__error              : $bw_red;
+$color__valid              : $bw_green;
+$color__warning            : $bw_orange;
+$color__information        : $color__copyLight;
+
+
+$link__color               : $bw_blue;
+$link__hover__color        : $bw_blueOver;
+$link__visited__color      : $bw_blueOver;
+
+$selected__font__color       : $white;
+$selected__background__color : $bw_blue;
+$invalid__background__color  : $bw_red;
+
+
+//Typography
+$font                      : "opensans", "Arial", sans-serif;
+$font_secondary            : "blackwell", Georgia, Times, "Times New Roman", serif;
+$font_secondary_bold       : "blackwellBold", Georgia, Times, "Times New Roman", serif;
+$font_children             : "ampersand";
+$line_height               : 24px/14px; // = 1.7142857143
+$fsize                     : 14px; // use @include rem(font-size, 1.4rem); for 14px font-sizes...
+
+//Breakpoints
+$bp_xsmall                 : 0320px;// / $fsize * 1rem; // 22.857142857em
+$bp_small                  : 0489px;// / $fsize * 1rem; // 34.285714286em
+$bp_tab                    : 0700px;// / $fsize * 1rem; // 50em
+$bp_med                    : 0850px;// / $fsize * 1rem; // 60.714285714em
+$bp_large                  : 1024px;// / $fsize * 1rem; // 73.142857143em
+
+// z-index
+$zi-1                      : 1;
+$zi-2                      : 2;
+$zi-3                      : 3;
+$zi-4                      : 4;

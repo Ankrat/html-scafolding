@@ -1,0 +1,9 @@
+{% extends "test_base.html" %}
+
+{% block page_title %}Module Name{% endblock %}
+
+
+{% block javascripts %}
+    {# Need to insert the generated test file #}
+    <script src="/modulename/index.js" data-cover></script>
+{% endblock %}

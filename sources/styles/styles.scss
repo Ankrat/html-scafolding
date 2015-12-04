@@ -1,0 +1,85 @@
+// /**
+//  *  $TABLE OF CONTENTS
+//  *  based generally on Harry Roberts excellent CSS Guidelines
+//  *  https://github.com/csswizardry/CSS-Guidelines
+//  **/
+
+// /**
+//  * VARIABLES..............................Declarations of Sass variables
+//  * .....Colors
+//  * .....Typography
+//  * .....Layout
+//  * .....Defaults
+//  * .....Breakpoints
+//  * MIXINS.................................Sass mixins
+// /**
+//  * NORMALIZE..............................Set normalize defaults
+//  * GLOBAL CLASSES.........................Set reset defaults
+//  * GLOBAL ELEMENTS........................Establish global styles
+//  * .....Main
+//  * .....Headings
+//  * .....Text-related elements (p, blockquote, lists)
+//  * .....Defaults
+//  * .....Breakpoints
+//  * TYPOGRAPHY------------------------------
+//  * MEDIA-----------------------------------
+//  * LAYOUT----------------------------------
+//  * NAVIGATION------------------------------
+//  * TOC To Be Continued
+//  **/
+
+
+// ------------------------------------
+// $VARIABLES
+// ------------------------------------
+@import "generic/variables";
+@import "generic/flags-mixins";
+@import "generic/icons-mixins";
+
+// ------------------------------------
+// $MIXINS
+// ------------------------------------
+@import "generic/mixins";
+
+
+// ------------------------------------
+// $GRID
+// ------------------------------------
+@import "./node_modules/susy/sass/susy";
+
+
+// /*************************************
+//  *   $NORMALIZE
+//  ************************************/
+@import "generic/normalize";
+
+
+// /*************************************
+//  *   $GLOBAL ELEMENTS
+//  ************************************/
+
+@import "generic/global-classes";
+@import "generic/state-classes";
+@import "generic/main";
+// Atoms
+// @import "../patternlab/atom/PATH/TO/_ATOM";
+
+// /*************************************
+//  *   $LAYOUT
+//  ************************************/
+@import "layouts/layouts";
+
+
+// /*************************************
+//  *   $PAGE STRUCTURE
+//  ************************************/
+// Molecule and Organism
+
+// @import "../patternlab/molecule/PATH/TO/_MOLECULE";
+
+// @import "../patternlab/organism/PATH/TO/_ORGANISM";
+
+// /*************************************
+//  *   $PRINT STYLE
+//  ************************************/
+@import "layouts/print";

@@ -1,0 +1,12 @@
+/* Links */
+a {
+    color           : $link__color;
+    text-decoration : none;
+    outline         : 0;
+    border-bottom   : 1px solid transparent;
+
+    &:hover, &:focus {
+        color        : $link__hover__color;
+        border-color : $link__hover__color;
+    }
+}

@@ -1,0 +1,219 @@
+// ------------------------------------
+// $MIXINS
+// ------------------------------------
+
+// /* CSS Transition
+//  * Usage: @include transition(width,0.3s,ease-out);
+//  **/
+@mixin transition($transition-property, $transition-time, $method) {
+    -webkit-transition : $transition-property $transition-time $method;
+    -moz-transition    : $transition-property $transition-time $method;
+    -ms-transition     : $transition-property $transition-time $method;
+    -o-transition      : $transition-property $transition-time $method;
+    transition         : $transition-property $transition-time $method;
+}
+
+// /*
+//  * Vertical alignment
+//  * - block elem => align-midle
+//  * - inline lem => text-midle
+//  * Cris Coyer CSS-trick: https://css-tricks.com/centering-css-complete-guide/
+//  **/
+@mixin align-middle() {
+    // child
+    position  : absolute;
+    top       : 50%;
+    transform : translateY(-50%);
+    // Parent Selector Must have position: relative
+}
+@mixin text-middle{
+    // child
+    display: table-cell;
+    vertical-align: middle;
+    // Parent Selector Must have display: table;
+}
+
+
+// /*
+//  * Micro Clearfix
+//  * Nicolas Gallagher http://nicolasgallagher.com/micro-clearfix-hack/
+//  * Known support: Firefox 3.5+, Safari 4+, Chrome, Opera 9+, IE 6+
+//  **/
+@mixin clearfix() {
+    *zoom: 1;
+
+    &:before,
+    &:after {
+        content: "";
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+
+// /*
+//  * Requires inline-block or block for proper styling
+//  * Adam c brewer https://gist.github.com/adamcbrewer/6539746
+//  **/
+@mixin text-truncate {
+    overflow      : hidden;
+    text-overflow : ellipsis;
+    white-space   : nowrap;
+}
+
+
+// /*
+//  * Offscreen Text
+//  * David Walsh https://css-tricks.com/redesigning-with-sass
+//  **/
+@mixin linkTextOffscreen() {
+    text-indent     : -9999px;
+    overflow        : hidden;
+    text-decoration : none;
+    display         : block;
+    font-size       : 0;
+    text-align      : start;
+}
+
+// /* ==========================================================================
+//    REM Mixin with px fallback
+//    ========================================================================== */
+
+// /* EXAMPLE
+//  *     body {
+//  *       @include rem(font-size, 1.6rem);
+//  *       @include rem(padding, 20px 10px);
+//  *     }
+//  *
+//  *     CSS output
+//  *     body {
+//  *       font-size: 16px;  /* Fallback for IE8 */
+//  *       font-size: 1.6rem;
+//  *       padding: 20px 10px; /* Fallback for IE8 */
+//  *       padding: 2rem 1rem;
+//  *     }
+//  **/
+
+@function parseInt($n) {
+  @return $n / ($n * 0 + 1);
+}
+
+@mixin rem($property, $values) {
+  $px : ();
+  $rem: ();
+
+  @each $value in $values {
+
+    @if $value == 0 or $value == auto {
+      $px : append($px , $value);
+      $rem: append($rem, $value);
+    }
+
+    @else {
+      $unit: unit($value);
+      $val: parseInt($value);
+
+      @if $unit == "px" {
+        $px : append($px,  $value);
+        $rem: append($rem, ($val / 10 + rem));
+      }
+
+      @if $unit == "rem" {
+        $px : append($px,  ($val * 10 + px));
+        $rem: append($rem, $value);
+      }
+    }
+  }
+
+  @if $px == $rem {
+    #{$property}: $px;
+  } @else {
+    #{$property}: $px;
+    #{$property}: $rem;
+  }
+}
+
+
+// /* ==========================================================================
+//    BEM constructor!
+//    ========================================================================== */
+
+/// Block Element
+/// @access public
+/// @param {String} $element - Element's name
+@mixin element($element) {
+    &__#{$element} {
+        @content;
+    }
+}
+
+/// Block Modifier
+/// @access public
+/// @param {String} $modifier - Modifier's name
+@mixin modifier($modifier) {
+    &--#{$modifier} {
+        @content;
+    }
+}
+
+    /// @alias element
+    @mixin e($element) {
+        @include element($element)  {
+            @content;
+        }
+    }
+    /// @alias modifier
+    @mixin m($modifier) {
+        @include modifier($modifier) {
+            @content;
+        }
+    }
+
+
+// /* EXAMPLE
+//  *
+//  *
+//  *      <elem class="block block--modifier">
+//  *          <elem class="block__element" />
+//  *          <elem class="block__element block__element--modifier" />
+//  *      </elem>
+//  *
+//  *
+//  *
+//  *    .block {
+//  *        // CSS declarations for `.block`
+//  *
+//  *        @include e('element') {
+//  *            // CSS declarations for `.block__element`
+//  *
+//  *            @include m('modifier') {
+//  *                // CSS declarations for `.block__element--modifier`
+//  *            }
+//  *        }
+//  *
+//  *        @include m('modifier') {
+//  *            // CSS declarations for `.block--modifier`
+//  *        }
+//  *    }
+//  *
+//  * OR
+//  *
+//  *    .menu {
+//  *        // CSS declarations for `.menu`
+//  *
+//  *        @include e('item') {
+//  *            // CSS declarations for `.menu__item`
+//  *
+//  *            @include m('is-active') {
+//  *                // CSS declarations for `.menu__item--is-active`
+//  *            }
+//  *        }
+//  *
+//  *        @include m('is-hidden') {
+//  *            // CSS declarations for `.menu--is-hidden`
+//  *        }
+//  *    }
+//  *
+//  **/

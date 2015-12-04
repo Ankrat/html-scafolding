@@ -1,0 +1,12 @@
+// /*----------- Main ---------------*/
+html {
+    // /* => default browser font-size =16px, decrease to a 10 base font for rem*/
+    font-size: 62.5%;
+}
+
+body {
+    @include rem(font-size, 1.4rem); // 14px
+    color       : $color__copy;
+    font-family : $font;
+    line-height : $line_height;
+}

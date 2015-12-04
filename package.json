@@ -3,23 +3,23 @@
   "version": "0.0.1",
   "description": "Folder structure set up and workflow to develop HTML sites with gulp, tests, styleguide and documentaion",
   "main": "gulpfile.js",
-  "scripts": {
-    "test": "./node_modules/.bin/istanbul test ./node_modules/.bin/_mocha ./sources/scripts/modules/**/test/*.js -- -R spec && exit 1"
-  },
   "author": "Yann Le Corre",
   "license": "ISC",
   "dependencies": {
-    "autoprefixer": "^6.1.1",
+    "snyk": "^1.6.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.1.2",
+    "browser-sync": "^2.10.0",
     "browserify": "^12.0.1",
     "chai": "^3.4.1",
     "critical": "^0.6.0",
-    "css-sprite": "^0.9.9",
     "del": "^2.1.0",
     "gulp": "^3.9.0",
     "gulp-bless": "^3.0.1",
+    "gulp-browserify": "^0.5.1",
     "gulp-cache": "^0.4.1",
     "gulp-concat": "^2.6.0",
-    "gulp-coverage": "^0.3.38",
     "gulp-data": "^1.2.1",
     "gulp-exec": "^2.1.2",
     "gulp-if": "^2.0.0",
@@ -27,17 +27,23 @@
     "gulp-jshint": "^2.0.0",
     "gulp-minify-css": "^1.2.1",
     "gulp-minify-html": "^1.0.4",
-    "gulp-mocha": "^2.2.0",
     "gulp-nunjucks-render": "^1.0.0",
     "gulp-postcss": "^6.0.1",
+    "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.1.0",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.5.1",
-    "istanbul": "^0.4.1",
     "jshint": "^2.8.0",
+    "mocha": "^2.3.4",
+    "npm": "^3.5.1",
+    "oldie": "^1.3.0",
     "path": "^0.12.7",
     "postcss-cssstats": "^1.0.0",
     "postcss-will-change": "^1.0.0",
-    "snyk": "^1.5.0"
+    "snyk": "^1.5.0",
+    "sprity": "^1.0.8"
+  },
+  "scripts": {
+    "test": "snyk test"
   }
 }

@@ -1,0 +1,112 @@
+// ------------------------------------
+//   $GLOBAL CLASSES
+// ------------------------------------
+
+// /* ==========================================================================
+//    Helper classes
+//    ========================================================================== */
+
+// /*
+//  * Hide from both screenreaders and browsers: h5bp.com/u
+//  **/
+ %hidden,
+.hidden {
+    display    : none !important;
+    visibility : hidden;
+}
+
+// /*
+//  * Hide only visually, but have it available for screenreaders: h5bp.com/v
+//  **/
+%visuallyhidden,
+.visuallyhidden {
+    border   : 0;
+    clip     : rect(0 0 0 0);
+    height   : 1px;
+    margin   : -1px;
+    overflow : hidden;
+    padding  : 0;
+    position : absolute;
+    width    : 1px;
+//     /*
+//      * Extends the .visuallyhidden class to allow the element to be focusable
+//      * when navigated to via the keyboard: h5bp.com/p
+//      **/
+    &.focusable:active,
+    &.focusable:hover{
+        clip     : auto;
+        height   : auto;
+        margin   : 0;
+        overflow : visible;
+        position : static;
+        width    : auto;
+    }
+
+}
+
+%unvisuallyhidden,
+.unvisuallyhidden{
+    clip     : auto;
+    height   : auto;
+    margin   : 0;
+    overflow : visible;
+    position : static;
+    width    : auto;
+}
+
+// /*
+//  * Hide visually and from screenreaders, but maintain layout
+//  **/
+%invisible,
+.invisible {
+    visibility: hidden;
+}
+
+.clearfix,
+.group{
+    @include clearfix;
+}
+
+.text-link {
+    color           : $link__color;
+    border-bottom   : 1px solid transparent;
+    margin: 0;
+    padding: 0;
+    display: inline;
+    cursor: pointer;
+
+    &:hover, &:focus {
+        color        : $link__hover__color;
+        border-color : $link__hover__color;
+    }
+}
+
+.speech{
+    border: 1px solid $grey_light;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    padding: 3px 10px;
+    margin-bottom: $space_half;
+    &:before,
+    &:after{
+        content: "";
+        width: 0;
+        height: 0;
+        position: absolute;
+        border: 1px solid transparent;
+        transform: rotate(10deg);
+    }
+    &:before{
+        border-width: 7px;
+        border-left-color: #ddd;
+        left: 0px;
+        bottom: -7px;
+    }
+    &:after{
+        border-width: 8px;
+        border-left-color: #fff;
+        left: 1px;
+        bottom: -6px;
+    }
+}

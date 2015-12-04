@@ -1,0 +1,18 @@
+// State classes
+.is-open{}
+.is-close{}
+.is-hidden{
+    display: none;
+}
+.is-fixed{
+    position: fixed;
+}
+.is-important{
+    font-weight: 600;
+    color: $bw-red;
+}
+
+.is-info{}
+.is-warning{}
+.is-valid{}
+.is-error{}

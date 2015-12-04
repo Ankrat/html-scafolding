@@ -1,0 +1,51 @@
+/*
+#Headings#
+*/
+h1, .alpha{
+    @include rem(font-size, 2.4rem);
+    line-height: 1.2;
+    margin: 0;
+    font-weight: 400;
+}
+
+h2, .beta{
+    @include rem(font-size, 2.0rem);
+    line-height: 1.2;
+    margin: 0;
+    font-weight: 400;
+}
+
+h3, .gamma{
+    @include rem(font-size, 1.8rem);
+    line-height: 1.2;
+    margin: 0;
+    font-weight: 400;
+}
+
+h4, .delta{
+    @include rem(font-size, 1.6rem);
+    font-weight: 400;
+}
+
+h5, .epsilon{
+font-weight: 400;}
+
+h6, .zeta{
+font-weight: 400;}
+
+.subheading {
+    font-family: $font_secondary;
+    font-weight: normal;
+}
+
+.giga {
+    @include rem(font-size, 6.0rem);
+}
+.mega {}
+.kilo {}
+
+.page-title{
+    color: $color__copy;
+    font-family: $font_secondary;
+    margin-bottom: $space;
+}

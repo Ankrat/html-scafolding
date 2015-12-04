@@ -1,0 +1,149 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html lang="{{ lang }}" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="{{ lang }}" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="{{ lang }}" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="{{ lang }}" class="no-js"> <!--<![endif]-->
+<head>
+
+
+    <title>Style-guide | {BW}</title>
+    <meta name="description" content="{{ meta.description }}">
+    <meta name="keywords" content="{{ meta.keywords }}">
+
+    <link rel="stylesheet" href="/styles/font.min.css" />
+
+    <!-- Implement localStorage font for Blackwell's fonts -->
+    <script>!function(){"use strict";function e(e,t,n){e.addEventListener?e.addEventListener(t,n,!1):e.attachEvent&&e.attachEvent("on"+t,n)}function t(e){return window.localStorage&&localStorage.font_css_cache&&localStorage.font_css_cache_file===e}function n(){if(window.localStorage&&window.XMLHttpRequest)if(t(o))c(localStorage.font_css_cache);else{var n=new XMLHttpRequest;n.open("GET",o,!0),e(n,"load",function(){4===n.readyState&&(c(n.responseText),localStorage.font_css_cache=n.responseText,localStorage.font_css_cache_file=o)}),n.send()}else{var a=document.createElement("link");a.href=o,a.rel="stylesheet",a.type="text/css",document.getElementsByTagName("head")[0].appendChild(a),document.cookie="font_css_cache"}}function c(e){var t=document.createElement("style");t.innerHTML=e,document.getElementsByTagName("head")[0].appendChild(t)}var o="/styles/font.min.css";window.localStorage&&localStorage.font_css_cache||document.cookie.indexOf("font_css_cache")>-1?n():e(window,"load",n)}();
+    </script>
+
+    <link rel="stylesheet" href="/styles/styles.min.css" />
+    <link rel="stylesheet" href="styles/bw-style.min.css">
+
+    <style>
+        .sg-content{max-width: 70%; float:left;}
+        .sg-nav{max-width: 30%; float: right;}
+        .sg-section{}
+        .sg-atoms{}
+        .sg-molecules{}
+        .sg-organisms{}
+    </style>
+
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+</head>
+    <body>
+
+
+
+        <div class="container clearfix">
+
+            <main role="document" class="sg-content" id="main">
+
+                <section class="sg-info">
+                    <p> All modules listed here are rendered at full width as the layout is set up within the templates...</p>
+                </section>
+                <section class="sg-section sg-atoms">
+                    <!-- inject:atom:html -->
+                    <!-- contents of htm partials will be injected here -->
+                    <!-- endinject -->
+                </section>
+
+                <section class="sg-section sg-molecules">
+                    <!-- inject:molecule:html -->
+                    <!-- contents of htm partials will be injected here -->
+                    <!-- endinject -->
+                </section>
+
+                <section class="sg-section sg-organisms">
+                    <!-- inject:organism:html -->
+                    <!-- contents of htm partials will be injected here -->
+                    <!-- endinject -->
+                </section>
+
+
+
+            </main>
+
+            <nav class="sg-nav nav-toc fixedsticky" role="navigation">
+                <!-- inject:links -->
+                <!-- contents of htm partials will be injected here -->
+                <!-- endinject -->
+
+
+                <!-- Generate side nav via js  -->
+                <ul id="toc" style="display:none"></ul>
+                <noscript><p><a href="http://enable-javascript.com">Please enable JavaScript</a>.</p></noscript>
+            </nav>
+
+        </div>
+
+        <script>
+            function tocNavigation(){
+                var toc = document.getElementById('toc');
+                var hx = $('h2, h3, h4, h5', 'section');
+                var hx_len = hx.length;
+                var toc_contents = '';
+                var anchor, tag, the_text;
+                var firstBlock = false;
+
+                var firstWord = /\w+/;
+                var currentMatch = '';
+                var inner;
+
+                for (var i = 0, j = hx_len; i < j; i++) {
+                    tag = hx[i].tagName.toLowerCase();
+                    inner = '';
+
+                    if (tag === 'h2') {
+                        currentMatch = firstWord.exec(hx[i].innerHTML);
+                        currentMatch = currentMatch[0].toLowerCase();
+                    }
+
+                    the_text = $.trim(hx[i].innerHTML);
+                    anchor = currentMatch + '_' + the_text.replace(/\s+|\-/g, '_').replace(/[^A-Z0-9_]/gi, '').replace(/_+/g, '_').toLowerCase();
+                    inner += '<a href="#' + anchor + '" class="anchor_link js-here" title="Permalink"></a>';
+
+                    if (tag === 'h2' || tag === 'h3') {
+                        toc_contents += '<li class="' + tag + '"><a href="#' + anchor + '">' + the_text + '</a></li>';
+                    }
+                    if (tag === 'h2' && firstBlock === true) {
+                        inner += '<a href="#main" class="back-anchor" title="Top">Back to Top</a>';
+                    }
+                    if (inner !== '') {
+                        hx[i].id = anchor;
+                        hx[i].innerHTML += inner;
+                    }
+                    if (tag === 'h2') {
+                        firstBlock = true;
+                    }
+                }
+                toc.innerHTML = toc_contents;
+                toc.style.display = 'block';
+            }
+
+            function smoothScroll(){
+              $('a[href*=#]:not([href=#])').click(function() {
+                if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+                  var target = $(this.hash);
+                  target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+                  if (target.length) {
+                    $('html,body').animate({
+                      scrollTop: target.offset().top
+                    }, 1000);
+                    return false;
+                  }
+                }
+              });
+            }
+
+
+            $(document).ready(function(){
+
+                tocNavigation();
+                smoothScroll();
+            });
+
+
+        </script>
+
+    </body>
+</html>

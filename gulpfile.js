@@ -4,7 +4,8 @@
 */
     var gulp    = require('gulp'),
         del     = require('del')
-        rename  = require('gulp-rename');
+        rename  = require('gulp-rename'),
+        fs      = require('fs');
 
     // GULP-PLUGINS: Tests
     // In package.json, not used in gulp
@@ -76,9 +77,9 @@
         reload      = browserSync.reload;
 
 
-    var paths = {
+    var filePaths = {
         site       : {
-            source : ["./sources/to_build_pages/*.html"] ,
+            source : ["./sources/patternlab/to_build_pages/*.html"] ,
             destination : "./build/"
         },
         styleguide : {
@@ -98,7 +99,7 @@
             destination : "./build/images"
         },
         data       : {
-            source : ["./sources/data/data.json"] ,
+            source : "./sources/data/data.json" ,
             destination : "./build/data"
         }
     };
@@ -107,7 +108,7 @@
 * Nunjucks setup
 *
 */
-    nunjucksRender.nunjucks.configure('sources/patternlab/');
+    nunjucksRender.nunjucks.configure('sources/patternlab/template');
     // nunjucksRender({
     //     css_path: 'http://company.com/css/'}
     // );
@@ -149,17 +150,24 @@
     // html => {atoms, molecules, organisms}/{{elementName}}.html, /!\ create data.json => use template engine
     gulp.task('html', function() {
         // Gets .html and .nunjucks files in pages
-        return gulp.src( paths.site.source )
+        return gulp.src( filePaths.site.source )
             // use data.json
-            .pipe(data(function() {
-                return require( paths.data.source )
+            .pipe(data(function(file) {
+                if( fs.existsSync(filePaths.data.source) ){
+                    return require( filePaths.data.source )
+                }else{
+                    return;
+                }
             }))
             // page-specific json
             .pipe(data(function(file) {
                 var fileName = path.basename(file.path);
                 fileName = fileName.substr(0, fileName.lastIndexOf('.'));
-                if( path.dirname(file.path) + fileName + '.json' ){
-                    return require( path.dirname(file.path) + fileName + '.json');
+
+                var overwriteData = path.dirname(file.path) + fileName + '.json';
+
+                if( fs.existsSync(overwriteData) ){
+                    return require( overwriteData );
                 }else{
                     return;
                 }
@@ -171,7 +179,7 @@
             }))
             .pipe(rename({dirname: ''}))
             // output files in app folder
-            .pipe(gulp.dest( paths.site.dest ));
+            .pipe(gulp.dest( filePaths.site.destination ));
     });
 
     // sass => {atoms, molecules, organisms}/{{elementName}}.scss /!\ order and inheritance, optimization criticalCss?

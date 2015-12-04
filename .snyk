@@ -34,5 +34,11 @@ ignore:
     - 'browser-sync-ui@0.5.16 > weinre@2.0.0-pre-I0Z7U9OV > express@2.5.11 > connect@1.9.2':
         reason: None given
         expires: '2016-01-02T16:33:02.475Z'
-patch: {}
+patch:
+  'npm:uglify-js:20151024':
+    - 'ruglify@1.0.0 > uglify-js@2.2.5':
+        patched: '2015-12-04T16:27:48.124Z'
+  'npm:uglify-js:20150824':
+    - 'ruglify@1.0.0 > uglify-js@2.2.5':
+        patched: '2015-12-04T16:27:48.124Z'
 version: v1

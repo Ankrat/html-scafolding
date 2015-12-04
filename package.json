@@ -44,6 +44,9 @@
     "sprity": "^1.0.8"
   },
   "scripts": {
-    "test": "snyk test"
-  }
+    "test": "snyk test",
+    "snyk-protect": "snyk protect",
+    "postinstall": "npm run snyk-protect"
+  },
+  "snyk": true
 }

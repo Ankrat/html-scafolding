@@ -76,7 +76,7 @@
         reload      = browserSync.reload;
 
 
-paths = {
+    var paths = {
         site       : {
             source : ["./sources/to_build_pages/*.html"] ,
             destination : "./build/"
@@ -330,6 +330,16 @@ paths = {
                 baseDir: 'build/reports/coverage/'
             },
             port: 8888
+        });
+    });
+
+    // Serve  test report
+    gulp.task('serve', function(){
+        browserSync({
+            server: {
+                baseDir: 'build/'
+            },
+            port: 8000
         });
     });
 

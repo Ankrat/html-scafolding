@@ -2,16 +2,6 @@
 // $MIXINS
 // ------------------------------------
 
-// /* CSS Transition
-//  * Usage: @include transition(width,0.3s,ease-out);
-//  **/
-@mixin transition($transition-property, $transition-time, $method) {
-    -webkit-transition : $transition-property $transition-time $method;
-    -moz-transition    : $transition-property $transition-time $method;
-    -ms-transition     : $transition-property $transition-time $method;
-    -o-transition      : $transition-property $transition-time $method;
-    transition         : $transition-property $transition-time $method;
-}
 
 // /*
 //  * Vertical alignment
@@ -75,6 +65,13 @@
     display         : block;
     font-size       : 0;
     text-align      : start;
+}
+
+@mixin minHeight($val=100px){
+    // IE treats "height" how "min-height" is supposed to be treated.
+    min-height : $val;
+    height     :auto !important;
+    height     : $val;
 }
 
 // /* ==========================================================================

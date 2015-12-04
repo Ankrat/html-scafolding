@@ -7,8 +7,8 @@
 // Grid
 $susy: (
     columns           : 12,
-    container         : 1050px,
-    gutters           : 0.5, // 60px columns, 30px gutters
+    container         : 70rem,
+    gutters           : 1/6,
     global-box-sizing : border-box,
     debug             : (
         // image: show-columns
@@ -17,21 +17,21 @@ $susy: (
 
 
 // Base spacing - measures
-$max_width                 : 1170px;
+$max_width                 : 70rem;
 
 $default_spacing           : 30px;
 //For use with margin
-$space                     : 1em;
+$space                     : 1rem;
 $space_and_half            : $space*1.5;
 $space_double              : $space*2;
 $space_quad                : $space*4;
 $space_half                : $space/2;
 $space_quarter             : $space/4;
 //For use with padding
-$pad                       : 1em;
+$pad                       : 1rem;
 $pad_and_half              : $pad*1.5;
 $pad_double                : $pad*2;
-$pad_quad                : $pad*4;
+$pad_quad                  : $pad*4;
 $pad_half                  : $pad/2;
 $pad_quarter               : $pad/4;
 
@@ -88,11 +88,9 @@ $invalid__background__color  : $bw_red;
 
 //Typography
 $font                      : "opensans", "Arial", sans-serif;
-$font_secondary            : "blackwell", Georgia, Times, "Times New Roman", serif;
-$font_secondary_bold       : "blackwellBold", Georgia, Times, "Times New Roman", serif;
-$font_children             : "ampersand";
-$line_height               : 24px/14px; // = 1.7142857143
-$fsize                     : 14px; // use @include rem(font-size, 1.4rem); for 14px font-sizes...
+$font_secondary            : Georgia, Times, "Times New Roman", serif;
+$line_height               : 24px/16px; // = 1.5
+$fsize                     : 16px; // use @include rem(font-size, 1.6rem); for 16px font-sizes...
 
 //Breakpoints
 $bp_xsmall                 : 0320px;// / $fsize * 1rem; // 22.857142857em

@@ -41,18 +41,12 @@
 
 
         <meta name="description" content="">
-        <title>Blackwell's | {% block page_title %}{% endblock %} </title>
+        <title>Starter | {% block page_title %}{% endblock %} </title>
 
         <!--[if lte IE 9]><script src="scripts/modernizr.min.js"></script><![endif]-->
         <!--[if lte IE 9]><script src="scripts/polyfill.min.js"></script><![endif]-->
 
         {% block head %}{% endblock %}
-
-        <link rel="stylesheet" href="styles/font.min.css" />
-
-        <!-- Implement localStorage font for Blackwell's fonts -->
-        <script>!function(){"use strict";function e(e,t,n){e.addEventListener?e.addEventListener(t,n,!1):e.attachEvent&&e.attachEvent("on"+t,n)}function t(e){return window.localStorage&&localStorage.font_css_cache&&localStorage.font_css_cache_file===e}function n(){if(window.localStorage&&window.XMLHttpRequest)if(t(o))c(localStorage.font_css_cache);else{var n=new XMLHttpRequest;n.open("GET",o,!0),e(n,"load",function(){4===n.readyState&&(c(n.responseText),localStorage.font_css_cache=n.responseText,localStorage.font_css_cache_file=o)}),n.send()}else{var a=document.createElement("link");a.href=o,a.rel="stylesheet",a.type="text/css",document.getElementsByTagName("head")[0].appendChild(a),document.cookie="font_css_cache"}}function c(e){var t=document.createElement("style");t.innerHTML=e,document.getElementsByTagName("head")[0].appendChild(t)}var o="/styles/font.min.css";window.localStorage&&localStorage.font_css_cache||document.cookie.indexOf("font_css_cache")>-1?n():e(window,"load",n)}();
-        </script>
 
         <link rel="stylesheet" href="styles/styles.min.css" />
 
@@ -63,11 +57,11 @@
         <div id="site-wrapper">
 
             <header class="main-header">
-                {% include "organism/global/header/header.html" %}
+                {# {% include "organism/header/header.html" %} #}
             </header>
 
             <div class="main-navigation">
-                {% include "molecule/navigation/sitenav/sitenav.html" %}
+                {# {% include "molecule/navigation/sitenav/sitenav.html" %} #}
             </div>
 
             <div class="main-banner"></div>
@@ -78,7 +72,7 @@
             </main>
 
             <!-- include footers files -->
-            {% include "organism/global/footer/footer.html" %}
+            {# {% include "organism/global/footer/footer.html" %} #}
 
 
             <!-- javascript files -->

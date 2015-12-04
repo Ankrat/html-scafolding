@@ -41,7 +41,8 @@
     "postcss-cssstats": "^1.0.0",
     "postcss-will-change": "^1.0.0",
     "snyk": "^1.5.0",
-    "sprity": "^1.0.8"
+    "sprity": "^1.0.8",
+    "susy": "^2.2.6"
   },
   "scripts": {
     "test": "snyk test",

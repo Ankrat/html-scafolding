@@ -149,7 +149,7 @@
 */
     // html => {atoms, molecules, organisms}/{{elementName}}.html, /!\ create data.json => use template engine
     gulp.task('html', function() {
-        // Gets .html and .nunjucks files in pages
+        // Gets .html files in pages
         return gulp.src( filePaths.site.source )
             // use data.json
             .pipe(data(function(file) {
@@ -250,7 +250,7 @@
 *
 */
     gulp.task('doc', function() {
-        del(['./build/documentation/*.html']);
+        // del(['./build/documentation/*.html']);
 
         var options = {
             continueOnError: false,       // default = false, true means don't emit error event
@@ -263,9 +263,23 @@
             stdout: true  // default = true, false means don't write stdout
         }
 
-        gulp.src('./sources/scripts/modules/*.js', {read: false})
-            .pipe(exec('./node_modules/.bin/jsdoc -c ./node_modules/jsdoc/conf.json ./sources/scripts/modules -r -d ./build/documentation', options))
+        gulp.src('./sources/scripts/modules/**/*.js', {read: false})
+            .pipe(exec('./node_modules/.bin/jsdoc -c ./jsdoc_conf.json ./sources/scripts/modules -r -d ./build/documentation', options))
             .pipe(exec.reporter(reportOptions));
+
+        gulp.src( '.sources/styles/doc-style/style.scss' )
+            .pipe(sourcemaps.init())
+            .pipe(sass({
+                style: 'expanded',
+                errLogToConsole: true
+            }))
+            .pipe(postcss(processors))
+            .pipe(rename({
+                suffix: '.min'
+            }))
+            .pipe(minifycss())
+            .pipe(sourcemaps.write())
+            .pipe(gulp.dest( '.build/documentation/styles' ));
     });
 
 
@@ -341,7 +355,17 @@
         });
     });
 
-    // Serve  test report
+    // Serve  doc
+    gulp.task('serveDoc', ['doc'], function(){
+        browserSync({
+            server: {
+                baseDir: 'build/documentation'
+            },
+            port: 9999
+        });
+    });
+
+    // Serve  build
     gulp.task('serve', function(){
         browserSync({
             server: {

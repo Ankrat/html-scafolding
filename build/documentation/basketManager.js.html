@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: basketManager.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: basketManager.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+* BASKET MANAGER
+* @description Add / Remove / Count... toolbelt for the shopping basket to be store in javascript
+* @module basketManager
+*
+* @todo Create basket object (sessionStorage?)
+*
+* @example
+* productObj: {
+*   item: "bread",
+*    price: 0.5
+* }
+*/
+var basketManager = (function() {
+
+    // Private
+    var _ = require('../../thirdparty/underscore.min.js');
+    var basket = [];
+
+    // productObj:
+    // {
+    //   item: "bread",
+    //   price: 0.5
+    // }
+
+    /**
+    * @name isProductValid
+    * @function
+    * @static
+    *
+    * @param productObj {JSON} product key/value pairs
+    * @return {Boolean}
+    *
+    * @description Check if productObj has all key:value pairs?
+    *
+    */
+    function isProductValid(productObj) {
+        if( productObj &amp;&amp; productObj.name &amp;&amp; productObj.price ){
+            if( !parseFloat(productObj.price) ){
+                return false;
+            }else{
+                return true;
+            }
+        }else{
+            return false;
+        }
+    }
+
+
+    /**
+    * @name isProductInBasket
+    * @function
+    * @static
+    *
+    * @param productObj {JSON} product key/value pairs
+    * @return {Boolean}
+    *
+    * @description Check if an item is already in the basket
+    *
+    */
+    function isProductInBasket(productObj) {
+        return _.contains(basket, productObj);
+    }
+
+    /**
+    * @name addItem
+    * @function
+    * @static
+    *
+    * @param productObj {JSON} product key/value pairs
+    *
+    * @description Add an element to the basket
+    *
+    */
+    function addItem(productObj) {
+
+        if( this.isProductValid(productObj) ){
+            basket.push(productObj);
+        }else{
+            console.log("Error while adding product ", productObj);
+            console.log("Check the format : { item: String, price: Float as String or Float}");
+        }
+        return;
+    }
+
+    /**
+    * @name removeItem
+    * @function
+    * @static
+    *
+    * @param productObj {JSON} product key/value pairs
+    *
+    * @description Remove an item from the basket
+    *
+    */
+    function removeItem(productObj) {
+        if(isProductInBasket){
+            basket = _.reject(basket, function( elem ){
+                        return elem = productObj;
+                    });
+        }
+        return;
+    }
+
+    /**
+    * @name clearBasket
+    * @function
+    * @static
+    *
+    *
+    * @description Empty the basket
+    * NOTE => look for references in Global object?
+    *
+    */
+    function clearBasket() {
+        basket = [];
+        return;
+    }
+
+    /**
+    * @name getItemCount
+    * @function
+    * @static
+    *
+    * @return {Integer}
+    *
+    * @description Return the number of item in the basket
+    *
+    */
+    function getItemCount() {
+        // _.each(basket, function(item) {
+        //     console.log("item name = ", item.item);
+        // });
+        return parseInt(basket.length);
+    }
+
+    /**
+    * @name getTotal
+    * @function
+    * @static
+    *
+    * @return {Float}
+    *
+    * @description Return the total
+    *
+    */
+    function getTotal() {
+        var q = this.getItemCount(),
+            p = 0;
+
+        while (q--) {
+            p += parseFloat(basket[q].price);
+        }
+        return parseFloat(p);
+    }
+
+
+    // function basketManagerTest(){
+    //     return{
+    //         isProductValid    : isProductValid,
+    //         isProductInBasket : isProductInBasket,
+    //         addItem           : addItem,
+    //         removeItem        : removeItem,
+    //         clearBasket       : clearBasket,
+    //         getItemCount      : getItemCount,
+    //         getTotal          : getTotal
+    //     };
+    // }
+
+    // Node variable set in gulp.js
+    // to expose all methods
+    /* istanbul ignore else */
+    if( process.env.dev ){
+        return{
+            isProductValid    : isProductValid,
+            isProductInBasket : isProductInBasket,
+            addItem           : addItem,
+            removeItem        : removeItem,
+            clearBasket       : clearBasket,
+            getItemCount      : getItemCount,
+            getTotal          : getTotal
+        };
+    }else{
+        // Exposed to public
+        return {
+            addItem: addItem,
+            removeItem: removeItem,
+            getItemCount: getItemCount,
+            getTotal: getTotal,
+            clearBasket: clearBasket
+        };
+    }
+
+
+}());
+
+
+module.exports = basketManager;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-basketManager.html">basketManager</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Mon Dec 07 2015 11:17:55 GMT+0000 (GMT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

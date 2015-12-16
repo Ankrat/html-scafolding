@@ -32,11 +32,10 @@
 
 /// @ignore $VARIABLES
 @import "generic/variables";
-// @import "generic/flags-mixins";
-// @import "generic/icons-mixins";
 
 /// @ignore $MIXINS
 @import "generic/mixins";
+@import "generic/include-media";
 
 /// @ignore $GRID
 @import "./node_modules/susy/sass/susy";

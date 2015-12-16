@@ -41,6 +41,7 @@
     "path": "^0.12.7",
     "postcss-cssstats": "^1.0.0",
     "postcss-will-change": "^1.0.0",
+    "sassdoc": "^2.1.18",
     "snyk": "^1.5.0",
     "sprity": "^1.0.8",
     "susy": "^2.2.6"

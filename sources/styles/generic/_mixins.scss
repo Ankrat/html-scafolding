@@ -1,34 +1,27 @@
-// ------------------------------------
-// $MIXINS
-// ------------------------------------
+////
+/// @author Yann Le Corre
+////
 
-
-// /*
-//  * Vertical alignment
-//  * - block elem => align-midle
-//  * - inline lem => text-midle
-//  * Cris Coyer CSS-trick: https://css-tricks.com/centering-css-complete-guide/
-//  **/
+/// @name align-middle
+/// @group Alignment
+/// @link https://css-tricks.com/centering-css-complete-guide/
 @mixin align-middle() {
-    // child
     position  : absolute;
     top       : 50%;
     transform : translateY(-50%);
-    // Parent Selector Must have position: relative
 }
+/// @name text-midle
+/// @group Alignment
+/// @link https://css-tricks.com/centering-css-complete-guide/
 @mixin text-middle{
-    // child
     display: table-cell;
     vertical-align: middle;
-    // Parent Selector Must have display: table;
 }
 
-
-// /*
-//  * Micro Clearfix
-//  * Nicolas Gallagher http://nicolasgallagher.com/micro-clearfix-hack/
-//  * Known support: Firefox 3.5+, Safari 4+, Chrome, Opera 9+, IE 6+
-//  **/
+/// Micro Clearfix
+/// @group Clearfix
+/// @name clearfix
+/// @link http://nicolasgallagher.com/micro-clearfix-hack/
 @mixin clearfix() {
     *zoom: 1;
 
@@ -42,11 +35,7 @@
     }
 }
 
-
-// /*
-//  * Requires inline-block or block for proper styling
-//  * Adam c brewer https://gist.github.com/adamcbrewer/6539746
-//  **/
+/// @name text-truncate
 @mixin text-truncate {
     overflow      : hidden;
     text-overflow : ellipsis;
@@ -54,10 +43,9 @@
 }
 
 
-// /*
-//  * Offscreen Text
-//  * David Walsh https://css-tricks.com/redesigning-with-sass
-//  **/
+/// Offscreen Text
+/// @name linkTextOffscreen
+/// @link https://css-tricks.com/redesigning-with-sass
 @mixin linkTextOffscreen() {
     text-indent     : -9999px;
     overflow        : hidden;
@@ -67,36 +55,43 @@
     text-align      : start;
 }
 
-@mixin minHeight($val=100px){
-    // IE treats "height" how "min-height" is supposed to be treated.
+/// IE treats "height" how "min-height" is supposed to be treated.
+/// @name minHeight
+/// @param {String} $val [100px] - height in px
+@mixin minHeight($val:100px){
     min-height : $val;
     height     :auto !important;
     height     : $val;
 }
 
-// /* ==========================================================================
-//    REM Mixin with px fallback
-//    ========================================================================== */
 
-// /* EXAMPLE
-//  *     body {
-//  *       @include rem(font-size, 1.6rem);
-//  *       @include rem(padding, 20px 10px);
-//  *     }
-//  *
-//  *     CSS output
-//  *     body {
-//  *       font-size: 16px;  /* Fallback for IE8 */
-//  *       font-size: 1.6rem;
-//  *       padding: 20px 10px; /* Fallback for IE8 */
-//  *       padding: 2rem 1rem;
-//  *     }
-//  **/
-
+/// REM Mixin with px fallback
+/// @group REM
 @function parseInt($n) {
   @return $n / ($n * 0 + 1);
 }
-
+/// @group REM
+/// @name rem
+/// @param {String} $property - property to apply the $values
+/// @param {String} $values - values to be applied as per CSS format
+/// @example
+///     body {
+///       @include rem(font-size, 1.6rem);
+///       @include rem(padding, 20px 10px);
+///     }
+///
+/// @output
+///    body {
+///
+///        font-size: 16px;
+///
+///        font-size: 1.6rem;
+///
+///        padding: 20px 10px;
+///
+///        padding: 2rem 1rem;
+///
+///    }
 @mixin rem($property, $values) {
   $px : ();
   $rem: ();
@@ -133,84 +128,60 @@
 }
 
 
-// /* ==========================================================================
-//    BEM constructor!
-//    ========================================================================== */
-
-/// Block Element
-/// @access public
+/// BEM Constructor
+/// <elem class="block block--modifier">
+///   <elem class="block__element" />
+///   <elem class="block__element block__element--modifier" />
+/// </elem>
+/// @group BEM
+/// @name element
 /// @param {String} $element - Element's name
+///
+/// @example
+///  .menu {
+///      @include e('item') {
+///        @include m('is-active') {}
+///      }
+///      @include m('is-hidden') {}
+///  }
+///
+/// @output
+///    .menu{}
+///
+///    .menu__item{}
+///
+///    .menu__item--is-active{}
+///
+///    .menu--is-hidden{}
+///
 @mixin element($element) {
     &__#{$element} {
         @content;
     }
 }
 
-/// Block Modifier
-/// @access public
+
+/// @name e
+/// @alias element
+@mixin e($element) {
+    @include element($element)  {
+        @content;
+    }
+}
+
+/// @group BEM
+/// @name modifier
 /// @param {String} $modifier - Modifier's name
 @mixin modifier($modifier) {
     &--#{$modifier} {
         @content;
     }
 }
-
-    /// @alias element
-    @mixin e($element) {
-        @include element($element)  {
-            @content;
-        }
+/// @group BEM
+/// @name m
+/// @alias modifier
+@mixin m($modifier) {
+    @include modifier($modifier) {
+        @content;
     }
-    /// @alias modifier
-    @mixin m($modifier) {
-        @include modifier($modifier) {
-            @content;
-        }
-    }
-
-
-// /* EXAMPLE
-//  *
-//  *
-//  *      <elem class="block block--modifier">
-//  *          <elem class="block__element" />
-//  *          <elem class="block__element block__element--modifier" />
-//  *      </elem>
-//  *
-//  *
-//  *
-//  *    .block {
-//  *        // CSS declarations for `.block`
-//  *
-//  *        @include e('element') {
-//  *            // CSS declarations for `.block__element`
-//  *
-//  *            @include m('modifier') {
-//  *                // CSS declarations for `.block__element--modifier`
-//  *            }
-//  *        }
-//  *
-//  *        @include m('modifier') {
-//  *            // CSS declarations for `.block--modifier`
-//  *        }
-//  *    }
-//  *
-//  * OR
-//  *
-//  *    .menu {
-//  *        // CSS declarations for `.menu`
-//  *
-//  *        @include e('item') {
-//  *            // CSS declarations for `.menu__item`
-//  *
-//  *            @include m('is-active') {
-//  *                // CSS declarations for `.menu__item--is-active`
-//  *            }
-//  *        }
-//  *
-//  *        @include m('is-hidden') {
-//  *            // CSS declarations for `.menu--is-hidden`
-//  *        }
-//  *    }
-//  *
-//  **/
+}

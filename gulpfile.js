@@ -45,7 +45,9 @@
                     browsers: 'last 2 versions, safari >= 9, ie >= 8'
                 })
             ],
-        bless = require('gulp-bless');  // Split css file in multiple files for IE<10 when needed
+        bless = require('gulp-bless'),  // Split css file in multiple files for IE<10 when needed
+        sassdoc = require('sassdoc'),
+        extras = require('sassdoc-extras');
 
     // GULP-PLUGINS: Images
     var imagemin = require('gulp-imagemin'),
@@ -87,7 +89,7 @@
             destination : "./build/styleguide"
         },
         sass       : {
-            source : ["./sources/styles/style.scss"] ,
+            source : ["./sources/styles/styles.scss"] ,
             destination : "./build/styles"
         },
         js         : {
@@ -191,7 +193,7 @@
     // });
 
     gulp.task('styles', function() {
-        return gulp.src( path.sass.source )
+        return gulp.src( filePaths.sass.source )
             .pipe(sourcemaps.init())
             .pipe(sass({
                 style: 'expanded',
@@ -203,7 +205,16 @@
             }))
             .pipe(minifycss())
             .pipe(sourcemaps.write())
-            .pipe(gulp.dest( path.sass.destination ));
+            .pipe(gulp.dest( filePaths.sass.destination ));
+    });
+
+    gulp.task('sassdoc', function () {
+        var options = {
+                dest: './build/styleguide/sassDoc',
+                verbose: true
+            };
+        return gulp.src('./sources/styles/**/*.scss')
+            .pipe(sassdoc( options ));
     });
 
     // js   => browserify modules in main.js, jshint main.js, move third-party, generate polyfill
@@ -330,7 +341,7 @@
 */
 
     // Serve  test report
-    gulp.task('serveTest', ['html-test', 'browserify'],  function(){
+    gulp.task('serveTest', ['html-test', 'browserify-test'],  function(){
         // Move Mocha from node to build for browser testing
         gulp.src('./node_modules/mocha/mocha.js')
             .pipe(gulp.dest('build/reports/tests/scripts'));
@@ -393,6 +404,7 @@
     // Watch changes
 
     gulp.task('default', function() {
+        gulp.start('html', 'styles', 'scripts', 'serve');
         // gulp.start('html-test', 'browserify', 'serveTest');
         // gulp.start('styles', 'scripts', 'polyfill', 'images', 'html', 'critical', 'serve','watch');
     });

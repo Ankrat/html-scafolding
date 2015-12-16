@@ -1,10 +1,12 @@
-/*------------------------------------*\
-    $VARIABLES
-\*------------------------------------*/
+/// @group Variables
 
 
-// Changing Susy default global settings
-// Grid
+/// Changing Susy default global settings
+/// @name susy
+/// @prop {Integer} columns [12] - Number of columns
+/// @prop {String} container [70rem] - Container max width
+/// @prop {Number} gutters [1/6] - Size of the gutter
+/// @prop {String} global-box-sizing [border-box] - Display model
 $susy: (
     columns           : 12,
     container         : 70rem,
@@ -16,42 +18,94 @@ $susy: (
 );
 
 
-// Base spacing - measures
+/// @name max-width
 $max_width                 : 70rem;
 
-$default_spacing           : 30px;
-//For use with margin
+// For use with margin
+
+/// @name space
+/// @group margin-space
 $space                     : 1rem;
+/// @name space_and_half
+/// @group margin-space
 $space_and_half            : $space*1.5;
+/// @name space_double
+/// @group margin-space
 $space_double              : $space*2;
+/// @name space_quad
+/// @group margin-space
 $space_quad                : $space*4;
+/// @name space_half
+/// @group margin-space
 $space_half                : $space/2;
+/// @name space_quarter
+/// @group margin-space
 $space_quarter             : $space/4;
-//For use with padding
+
+// For use with padding
+
+/// @name pad
+/// @group padding-space
 $pad                       : 1rem;
+/// @name pad_and_half
+/// @group padding-space
 $pad_and_half              : $pad*1.5;
+/// @name pad_double
+/// @group padding-space
 $pad_double                : $pad*2;
+/// @name pad_quad
+/// @group padding-space
 $pad_quad                  : $pad*4;
+/// @name pad_half
+/// @group padding-space
 $pad_half                  : $pad/2;
+/// @name pad_quarter
+/// @group padding-space
 $pad_quarter               : $pad/4;
 
 // Colors Starter all projects
+
+/// @name black
+/// @group default-colors
 $black                     : #000000;
+/// @name white
+/// @group default-colors
 $white                     : #FFFFFF;
+/// @name dark
+/// @group default-colors
 $dark                      : #333333;
+/// @name light
+/// @group default-colors
 $light                     : #EFEFEF;
+/// @name grey
+/// @group default-colors
 $grey                      : #808080;
+/// @name grey_light
+/// @group default-colors
 $grey_light                : #CCCCCC;
+/// @name grey_lighter
+/// @group default-colors
 $grey_lighter              : #DDDDDD;
 
+/// @name brand_facebook
+/// @group default-colors
 $brand_facebook            : #03539e;
+/// @name brand_twitter
+/// @group default-colors
 $brand_twitter             : #35ccff;
+/// @name brand_linkedin
+/// @group default-colors
 $brand_linkedin            : #007bb5;
+/// @name brand_youtube
+/// @group default-colors
 $brand_youtube             : #bb0000;
+/// @name brand_gplus
+/// @group default-colors
 $brand_gplus               : #dd4b39;
-//
 
-// Blackwell specific
+
+/// Blackwell specific
+/// @group client-colors
 $bw_blue                   : #002D62;
 $bw_blueOver               : #506794;
 $bw_blueAlt                : #00AEEF;
@@ -59,11 +113,14 @@ $bw_red                    : #D31145;
 $bw_green                  : #8DC63F;
 $bw_orange                 : #F57B20;
 
+/// Project color Definition
+/// @group
 $color__copy               : #555;
 $color__copyLight          : #777;
 $color__header             : #333;
 
 // Setings with colors above
+/// @group
 $color__primaryAction      : $bw_blueAlt;
 $color__primary__hover     : darken( $color__primaryAction, 10%);
 $color__secondaryAction    : $bw_blue;

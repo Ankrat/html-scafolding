@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CSS Stats test </title>
+
+    {# <link rel="stylesheet" href="/styles/font.min.css" /> #}
+    <link rel="stylesheet" href="/styles/style.min.css">
+
+    {% block head %}{% endblock %}
+</head>
+
+<body>
+    {% block content %}{% endblock %}
+
+
+    <!-- amCharts javascript sources-->
+    <script src="http://www.amcharts.com/lib/3/amcharts.js"></script>
+    <script src="http://cdn.amcharts.com/lib/3/serial.js"></script>
+    <script src="http://www.amcharts.com/lib/3/themes/patterns.js"></script>
+
+    <script src="stats.js"></script>
+    {% block javascripts %} {% endblock %}
+</body>
+
+</html>

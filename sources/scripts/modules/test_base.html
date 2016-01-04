@@ -18,10 +18,12 @@
 
 
     <script src="/scripts/mocha.js"></script>
+    <script src="/scripts/chai.js"></script>
+    <script src="/scripts/blanket.min.js" data-cover-adapter="/scripts/mocha_blanket.min.js"></script>
+
     <script>
         mocha.setup('bdd');
     </script>
-    <script src="/scripts/blanket.js" data-cover-adapter="/scripts/mocha_blanket.js"></script>
 
 
     {% block javascripts %} {% endblock %}

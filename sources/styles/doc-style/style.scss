@@ -55,3 +55,50 @@ body {
     background-color: $grey_lighter;
     color: $grey;
 }
+
+/*---------cssStats-----------*/
+#top-stats{
+    @include clearfix;
+     .stat-gallery {
+        @include gallery(3 of 12);
+    }
+}
+#declarations{
+    @include clearfix;
+     .stat-gallery {
+        @include gallery(2 of 12);
+    }
+}
+#unique-colors{
+    @include clearfix;
+     .stat-gallery {
+        @include gallery(4 of 12);
+    }
+}
+#unique-background-colors{
+    @include clearfix;
+    .stat-gallery {
+        @include gallery(4 of 12);
+    }
+}
+#unique-font-sizes{
+    @include clearfix;
+}
+#unique-font-families{
+    @include clearfix;
+}
+#unique-totals{
+    @include clearfix;
+    .stat-gallery {
+        @include gallery(2 of 12);
+    }
+}
+#specificity-graph{
+    @include clearfix;
+}
+#rulesize-graph{
+    @include clearfix;
+}
+#media-queries{
+    @include clearfix;
+}

@@ -1,0 +1,178 @@
+{% extends "cssStat_base.html" %}
+
+{% block content %}
+    <header>
+        <div>
+            <h1>filesize: {{ stats.size }}</h1>
+        </div>
+    </header>
+
+    <section id="top-stats" class="container">
+        <div class="stat-gallery">
+            <h1>{{ stats.rules.length }}</h1>
+            <p>Rules</p>
+        </div>
+        <div class="stat-gallery">
+            <h1>{{ stats.aggregates.selectors }}</h1>
+            <p>Selectors</p>
+        </div>
+        <div class="stat-gallery">
+            <h1>{{ stats.aggregates.declarations }}</h1>
+            <p>Declarations</p>
+        </div>
+        <div class="stat-gallery">
+            <h1>{{ stats.aggregates.properties.length }}</h1>
+            <p>Properties</p>
+        </div>
+    </section>
+
+    <section id="declarations" class="container">
+        <h1>Total Declarations</h1>
+        <div>
+            <div class="stat-gallery">
+                <p>Font Size</p>
+                <h1>{{ stats.aggregates.fontSize.total }}</h1>
+            </div>
+            <div class="stat-gallery">
+                <p>Float</p>
+                <h1>{{ stats.aggregates.float.total }}</h1>
+            </div>
+            <div class="stat-gallery">
+                <p>Width</p>
+                <h1>{{ stats.aggregates.width.total }}</h1>
+            </div>
+            <div class="stat-gallery">
+                <p>Height</p>
+                <h1>{{ stats.aggregates.height.total }}</h1>
+            </div>
+            <div class="stat-gallery">
+                <p>Color</p>
+                <h1>{{ stats.aggregates.color.total }}</h1>
+            </div>
+            <div class="stat-gallery">
+                <p>Background Color</p>
+                <h1>{{ stats.aggregates.backgroundColor.total }}</h1>
+            </div>
+        </div>
+    </section>
+    {# For Each #}
+    <section id="unique-colors" class="container">
+        <h2>
+          {{ uniques.color.length }} Unique Color(s)
+        </h2>
+        <div>
+            {% for color in uniques.color %}
+            <div class="stat-gallery">
+                <div style="color:{{ color.value }}">Aa</div>
+                <div>{{ color.value }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {# For Each #}
+    <section id="unique-background-colors" class="container">
+        <h2>
+          {{ uniques.backgroundColor.length }} Unique Background Color(s)
+        </h2>
+        <div>
+            {% for bgc in uniques.backgroundColor %}
+            <div class="stat-gallery">
+                <div class="mb1">
+                    <svg viewBox="0 0 64 64" width="64" height="64" style="display:block;width:100%;height:auto">
+                        <rect width="64" height="64" fill="{{ this.value }}" />
+                    </svg>
+                </div>
+                <div>{{ bgc.value }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {# For Each #}
+    <section id="unique-font-sizes" class="container">
+        <h2>
+          {{ uniques.fontSize.length }} Unique Font Size(s)
+        </h2>
+        <div>
+            {% for fz in uniques.fontSizeSorted %}
+            <div class="bold truncate stat-fz" style="font-size:{{ fz.value }}">
+                Font Size {{ fz.value }}
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {# For Each #}
+    <section id="unique-font-families" class="container">
+        <h2>
+          {{ uniques.fontFamily.length }} Unique Font Family(ies)
+        </h2> {% for ff in uniques.fontFamily %}
+        <div  class="stat-ff" style="font-family:{{ ff.value }}">
+            {{ ff.value }}
+        </div>
+        {% endfor %}
+    </section>
+
+
+    <section id="unique-totals" class="container">
+        <h1>Total vs. Unique Declarations</h1>
+        <div>
+            <div class="stat-gallery">
+                <p>{{ uniquesGraph.width.percentUnique * 100 }} %</p>
+                <div>Width</div>
+            </div>
+            <div class="stat-gallery">
+                <p>{{ uniquesGraph.height.percentUnique * 100 }} %</p>
+                <div>Height</div>
+            </div>
+            <div class="stat-gallery">
+                <p>{{ uniquesGraph.margin.percentUnique * 100 }} %</p>
+                <div>Margin</div>
+            </div>
+            <div class="stat-gallery">
+                <p>{{ uniquesGraph.padding.percentUnique * 100 }} %</p>
+                <div>Padding</div>
+            </div>
+            <div class="stat-gallery">
+                <p>{{ uniquesGraph.color.percentUnique * 100 }} %</p>
+                <div>Color</div>
+            </div>
+            <div class="stat-gallery">
+                <p>{{ uniquesGraph.backgroundColor.percentUnique * 100 }} %</p>
+                <div>Background Color</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="specificity-graph" class="container">
+        <h1>Specificity Graph</h1> {# {{ specificityGraph 1152 320 }} #}
+        <div id="chartdiv-specificity-graph" style="width: 100%; height: 400px; background-color: #FFFFFF;"></div>
+        <p>
+            Base 10 specificity score for each selector by source order. Generally, lower scores and flatter curves are better for maintainability.
+            <a href="http://csswizardry.com/2014/10/the-specificity-graph/">Learn More</a>
+        </p>
+    </section>
+
+    <section id="rulesize-graph" class="container">
+        <h1>Ruleset Size</h1> {# {{ rulesizeGraph 1152 320 }} #}
+        <div id="chartdiv-rulesize-graph" style="width: 100%; height: 400px; background-color: #FFFFFF;"></div>
+        <p>
+            Number of declarations per ruleset
+        </p>
+    </section>
+    {# For Each #}
+    <section id="media-queries" class="container">
+        <h1>
+          {{ stats.aggregates.mediaQueries.length }} Media Query(ies)
+        </h1>
+        <div>
+            {% for mq in stats.aggregates.mediaQueries %}
+            <div>
+                {{ mq }}
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+
+{% endblock %}
+
+{% block javascripts %}{% endblock %}

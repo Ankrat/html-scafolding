@@ -51,6 +51,7 @@ describe('basketManager', function() {
     describe('Get how many items:', function(){
         it('Adding 1 product => should have 1 item', function(){
             var prod = {name:"prod", price:"0.5"};
+            basketManager.clearBasket();
             basketManager.addItem(prod);
             expect(basketManager.getItemCount()).to.equal(1);
         });
@@ -59,6 +60,7 @@ describe('basketManager', function() {
     describe('Get the total of the basket:', function(){
         it('Adding product worth 0.5, should return 0.5', function(){
             var prod = {name:"prod", price:"0.5"};
+            basketManager.clearBasket();
             basketManager.addItem(prod);
             expect(basketManager.getTotal()).to.equal(0.5);
         });

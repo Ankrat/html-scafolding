@@ -1,7 +1,7 @@
 {% extends "cssStat_base.html" %}
 
 {% block content %}
-    <header>
+    <header class="container">
         <div>
             <h1>filesize: {{ stats.size }}</h1>
         </div>
@@ -116,30 +116,53 @@
         <h1>Total vs. Unique Declarations</h1>
         <div>
             <div class="stat-gallery">
-                <p>{{ uniquesGraph.width.percentUnique * 100 }} %</p>
-                <div>Width</div>
+                <p>
+                    <b>Width</b>
+                </p>
+                <p>Total: <i>{{ uniquesGraph.width.percentTotal * 100 }} %</i></p>
+                <p>Unique: <i>{{ uniquesGraph.width.percentUnique * 100 }} %</i></p>
             </div>
             <div class="stat-gallery">
-                <p>{{ uniquesGraph.height.percentUnique * 100 }} %</p>
-                <div>Height</div>
+                <p>
+                    <b>Height</b>
+                </p>
+                <p>Total: <i>{{ uniquesGraph.height.percentTotal * 100 }} %</i></p>
+                <p>Unique: <i>{{ uniquesGraph.height.percentUnique * 100 }} %</i></p>
             </div>
             <div class="stat-gallery">
-                <p>{{ uniquesGraph.margin.percentUnique * 100 }} %</p>
-                <div>Margin</div>
+                <p>
+                    <b>Margin</b>
+                </p>
+                <p>Total: <i>{{ uniquesGraph.margin.percentTotal * 100 }} %</i></p>
+                <p>Unique: <i>{{ uniquesGraph.margin.percentUnique * 100 }} %</i></p>
             </div>
             <div class="stat-gallery">
-                <p>{{ uniquesGraph.padding.percentUnique * 100 }} %</p>
-                <div>Padding</div>
+                <p>
+                    <b>Padding</b>
+                </p>
+                <p>Total: <i>{{ uniquesGraph.padding.percentTotal * 100 }} %</i></p>
+                <p>Unique: <i>{{ uniquesGraph.padding.percentUnique * 100 }} %</i></p>
             </div>
             <div class="stat-gallery">
-                <p>{{ uniquesGraph.color.percentUnique * 100 }} %</p>
-                <div>Color</div>
+                <p>
+                    <b>Color</b>
+                </p>
+                <p>Total: <i>{{ uniquesGraph.color.percentTotal * 100 }} %</i></p>
+                <p>Unique: <i>{{ uniquesGraph.color.percentUnique * 100 }} %</i></p>
             </div>
             <div class="stat-gallery">
-                <p>{{ uniquesGraph.backgroundColor.percentUnique * 100 }} %</p>
-                <div>Background Color</div>
+                <p>
+                    <b>Background Color</b>
+                </p>
+                <p>Total: <i>{{ uniquesGraph.backgroundColor.percentTotal * 100 }} %</i></p>
+                <p>Unique: <i>{{ uniquesGraph.backgroundColor.percentUnique * 100 }} %</i></p>
             </div>
         </div>
+    </section>
+
+    <section id="unicity-graph" class="container">
+        <h1>Unicity Graph</h1> {# {{ specificityGraph 1152 320 }} #}
+        <div id="chartdiv-unique-graph" style="width: 100%; height: 400px; background-color: #FFFFFF;"></div>
     </section>
 
     <section id="specificity-graph" class="container">

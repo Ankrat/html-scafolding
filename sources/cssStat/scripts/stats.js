@@ -21,6 +21,7 @@ request.onerror = function() {
 request.send();
 
 
+
 /**
 * @name createGraphs
 * @function
@@ -32,88 +33,149 @@ request.send();
 *
 */
 function createGraphs (stats) {
+    var _ = require('../../scripts/thirdparty/underscore.min.js');
+
     // Need to transform raw data in array of object key/value
-    // by prepanding "value"  => need underscore lib...
-    console.log("stats.specificityGraph => ", stats.specificityGraph);
-    console.log("stats.rulesizeGraph => ", stats.rulesizeGraph);
+    var sG = stats.specificityGraph,
+        NewsG = [];
+    _.each( sG, function(obj, index){
+        var firstDate = new Date();
+        var newDate = new Date(firstDate);
+        newDate.setDate(newDate.getDate() + index);
+
+        NewsG.push({date: newDate, value: obj});
+    });
+
+
+    var rzG = stats.rulesizeGraph,
+        NewrzG = [];
+
+    _.each( rzG, function(obj, index){
+        var firstDate = new Date();
+        var newDate = new Date(firstDate);
+        newDate.setDate(newDate.getDate() + index);
+
+        NewrzG.push({date: newDate, value: obj});
+    });
+
+    var uG = stats.uniquesGraph,
+        NewuG = [];
+
+    Object.getOwnPropertyNames(uG).forEach(function(val) {
+        if(val != "max"){
+            NewuG.push( { property: val, total: uG[val].total, unique: uG[val].unique });
+        }
+    });
+
 
     var specificityGraphData = {
         "type": "serial",
-        "categoryField": "",
+        "categoryField": "date",
         "autoMarginOffset": 40,
         "marginRight": 60,
         "marginTop": 60,
         "startDuration": 1,
         "fontSize": 13,
-        "theme": "patterns",
         "categoryAxis": {
-            "gridPosition": "start"
+            "gridPosition": "start",
+            "color": "#FFF"
         },
-        "trendLines": [],
         "graphs": [
             {
-                "bullet": "round",
-                "bulletSize": 10,
+                "bullet": "none",
                 "id": "AmGraph-1",
                 "lineAlpha": 1,
-                "lineThickness": 3,
+                "lineThickness": 1,
                 "title": "specificityGraphData",
-                "type": "smoothedLine"
+                "type": "smoothedLine",
+                "valueField": "value"
             }
         ],
-        "guides": [],
         "valueAxes": [
             {
                 "id": "ValueAxis-1",
                 "title": ""
             }
         ],
-        "allLabels": [],
-        "balloon": {},
-        "titles": [],
-        "dataProvider": stats.specificityGraph
+        "dataProvider": NewsG
     };
 
     var rulesizeGraphData = {
         "type": "serial",
-        "categoryField": "",
+        "categoryField": "date",
         "autoMarginOffset": 40,
         "marginRight": 60,
         "marginTop": 60,
         "startDuration": 1,
         "fontSize": 13,
-        "theme": "patterns",
         "categoryAxis": {
-            "gridPosition": "start"
+            "gridPosition": "start",
+            "color": "#FFF"
         },
-        "trendLines": [],
         "graphs": [
             {
-                "bullet": "round",
-                "bulletSize": 10,
+                "bullet": "none",
                 "id": "AmGraph-2",
                 "lineAlpha": 1,
-                "lineThickness": 3,
+                "lineThickness": 1,
                 "title": "rulesizeGraphData",
-                "type": "smoothedLine"
+                "type": "smoothedLine",
+                "valueField": "value"
             }
         ],
-        "guides": [],
         "valueAxes": [
             {
                 "id": "ValueAxis-2",
                 "title": ""
             }
         ],
-        "allLabels": [],
-        "balloon": {},
-        "titles": [],
-        "dataProvider": stats.rulesizeGraph
+        "dataProvider": NewrzG
+    };
 
+    var uniqueGraphData = {
+        "type": "serial",
+        "categoryField": "property",
+        "autoMarginOffset": 40,
+        "marginRight": 60,
+        "marginTop": 60,
+        "startDuration": 1,
+        "fontSize": 13,
+        "categoryAxis": {
+            "gridPosition": "start"
+        },
+        "graphs": [
+            {
+                "balloonText": "[[title]] of [[category]] property ([[value]])",
+                "id": "AmGraph-3",
+                "lineAlpha": 1,
+                "lineThickness": 1,
+                "fillAlphas": 0.9,
+                "title": "Total",
+                "type": "column",
+                "valueField": "total"
+            },
+            {
+                "balloonText": "[[title]] [[category]] property ([[value]])",
+                "id": "AmGraph-4",
+                "lineAlpha": 1,
+                "lineThickness": 1,
+                "fillAlphas": 0.9,
+                "title": "Unique",
+                "type": "column",
+                "valueField": "unique"
+            }
+        ],
+        "valueAxes": [
+            {
+                "id": "ValueAxis-2",
+                "title": ""
+            }
+        ],
+        "dataProvider": NewuG
     };
 
 
-
+    AmCharts.makeChart("chartdiv-unique-graph", uniqueGraphData);
     AmCharts.makeChart("chartdiv-specificity-graph", specificityGraphData);
     AmCharts.makeChart("chartdiv-rulesize-graph", rulesizeGraphData);
     return;

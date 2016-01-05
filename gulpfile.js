@@ -328,7 +328,7 @@
     // sass => cssstats
     gulp.task('html-stat', ['styles'], function(){
         // Add css for stats
-        gulp.src( './sources/styles/doc-style/style.scss' )
+        gulp.src( './sources/styles/stat-style/style.scss' )
             .pipe(sourcemaps.init())
             .pipe(sass({
                 style: 'expanded',

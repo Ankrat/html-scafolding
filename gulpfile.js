@@ -385,22 +385,20 @@
             path.dirname = testLess;
             path.basename += "Test";
         }))
-        .pipe(gulp.dest('build/reports/tests'))
-        .pipe(mocha({reporter: 'json'}))
-        .pipe(istanbul.writeReports({reporters: ['html'], dir:'build/reports/coverage'} ))
-        // Enforce a coverage of at least 90%
-        .pipe(istanbul.enforceThresholds({ thresholds: { global: 90 } }))
-        .pipe(gulp.dest('build/reports/coverage'));
+        .pipe(gulp.dest('build/reports/tests'));
     });
 
-    gulp.task('cover-js', function () {
-
+    gulp.task('pre-test', function () {
+        return gulp.src(['sources/scripts/modules/**/*.js', '!sources/scripts/modules/**/test/*.js'])
+        // Covering files
+        .pipe(istanbul())
+        // Force `require` to return covered files
+        .pipe(istanbul.hookRequire());
+    });
+    gulp.task('cover-js',['pre-test'], function () {
         return gulp.src(['sources/scripts/modules/**/test/*.js'])
-        .pipe(gbrowserify())
         .pipe(mocha())
-        .pipe(istanbul.writeReports({reporters: ['html'], dir:'build/reports/coverage'} ))
-        // Enforce a coverage of at least 90%
-        .pipe(istanbul.enforceThresholds({ thresholds: { global: 90 } }));
+        .pipe(istanbul.writeReports({reporters: ['html'], dir:'build/reports/coverage'} ));
     });
 
 /**
@@ -415,7 +413,7 @@
 *
 */
 
-    // Serve  test report
+    // Serve test report
     gulp.task('serveTest', ['html-test', 'browserify-test'],  function(){
         // Move Mocha from node to build for browser testing
         gulp.src('./node_modules/mocha/mocha.js')
@@ -437,8 +435,8 @@
         });
     });
 
-    // Serve  test report
-    gulp.task('serveCoverage', function(){
+    // Serve coverage report
+    gulp.task('serveCoverage',['cover-js'], function(){
         browserSync({
             server: {
                 baseDir: 'build/reports/coverage/'
@@ -447,7 +445,7 @@
         });
     });
 
-    // Serve  doc
+    // Serve doc
     gulp.task('serveDoc', ['doc'], function(){
         browserSync({
             server: {
@@ -457,7 +455,7 @@
         });
     });
 
-    // Serve  css stat report
+    // Serve css stat report
     gulp.task('serveStat', ['html-stat', 'browserify-stat'],  function(){
 
         browserSync({
@@ -468,7 +466,7 @@
         });
     });
 
-    // Serve  build
+    // Serve build
     gulp.task('serve', function(){
         browserSync({
             server: {

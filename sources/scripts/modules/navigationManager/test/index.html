@@ -1,0 +1,11 @@
+{% extends "test_base.html" %}
+
+{% block page_title %}Navigation Manager{% endblock %}
+
+
+{% block javascripts %}
+    {# Need to insert the generated test file #}
+    <script src="/navigationManager/navigationManager.js" data-cover></script>
+    {# Need to insert the generated test file #}
+    <script src="/navigationManager/navigationManagerTest.js"></script>
+{% endblock %}

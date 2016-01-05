@@ -69,6 +69,7 @@
             {% endfor %}
         </div>
     </section>
+
     {# For Each #}
     <section id="unique-background-colors" class="container">
         <h2>
@@ -87,6 +88,7 @@
             {% endfor %}
         </div>
     </section>
+
     {# For Each #}
     <section id="unique-font-sizes" class="container">
         <h2>
@@ -100,6 +102,7 @@
             {% endfor %}
         </div>
     </section>
+
     {# For Each #}
     <section id="unique-font-families" class="container">
         <h2>
@@ -110,7 +113,6 @@
         </div>
         {% endfor %}
     </section>
-
 
     <section id="unique-totals" class="container">
         <h1>Total vs. Unique Declarations</h1>
@@ -161,12 +163,12 @@
     </section>
 
     <section id="unicity-graph" class="container">
-        <h1>Unicity Graph</h1> {# {{ specificityGraph 1152 320 }} #}
+        <h1>Unicity Graph</h1>
         <div id="chartdiv-unique-graph" style="width: 100%; height: 400px; background-color: #FFFFFF;"></div>
     </section>
 
     <section id="specificity-graph" class="container">
-        <h1>Specificity Graph</h1> {# {{ specificityGraph 1152 320 }} #}
+        <h1>Specificity Graph</h1>
         <div id="chartdiv-specificity-graph" style="width: 100%; height: 400px; background-color: #FFFFFF;"></div>
         <p>
             Base 10 specificity score for each selector by source order. Generally, lower scores and flatter curves are better for maintainability.
@@ -175,12 +177,13 @@
     </section>
 
     <section id="rulesize-graph" class="container">
-        <h1>Ruleset Size</h1> {# {{ rulesizeGraph 1152 320 }} #}
+        <h1>Ruleset Size</h1>
         <div id="chartdiv-rulesize-graph" style="width: 100%; height: 400px; background-color: #FFFFFF;"></div>
         <p>
             Number of declarations per ruleset
         </p>
     </section>
+
     {# For Each #}
     <section id="media-queries" class="container">
         <h1>

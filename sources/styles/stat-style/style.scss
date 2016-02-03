@@ -1,60 +1,7 @@
 @import "../generic/variables";
 @import "../generic/mixins";
 @import "./node_modules/susy/sass/susy";
-
-
-/*----------- Main ---------------*/
-html {
-  font-size: 62.5%; /* => default browser font-size =16px, decrease to a 10 base font for rem*/
-}
-
-body {
-    @include rem(font-size, 1.4rem); // 14px
-    color       : $color__copy;
-    font-family : $font;
-    line-height : $line_height;
-    margin      : 0;
-    padding     : 0;
-}
-
-.container{
-    @include container(12);
-    margin    : 0 auto;
-}
-
-.content {
-    @include span(9 of 12);
-}
-
-.nav-toc {
-    @include span(3 last of 12);
-
-    .h2{
-        @include rem(font-size, 1.4rem);
-    }
-    .h3{
-        @include rem(font-size, 1.2rem);
-        @include rem(margin-left, 1rem);
-    }
-    ul{
-        padding: 0;
-        list-style: none;
-    }
-}
-
-.box, .box_notice {
-    background: #f0f0f0;
-    margin: 0 0 20px;
-    padding: 20px 20px 10px;
-    box-shadow: $grey_light 0 1px 3px;
-}
-
-.fixedsticky { top: 0; right: 0; }
-
-.to-be-modified{
-    background-color: $grey_lighter;
-    color: $grey;
-}
+@import "../doc-style/style.scss";
 
 /*---------cssStats-----------*/
 #top-stats{
@@ -66,7 +13,7 @@ body {
 #declarations{
     @include clearfix;
      .stat-gallery {
-        @include gallery(4 of 12);
+        @include gallery(2 of 12);
     }
 }
 #unique-colors{
@@ -90,7 +37,7 @@ body {
 #unique-totals{
     @include clearfix;
     .stat-gallery {
-        @include gallery(4 of 12);
+        @include gallery(2 of 12);
     }
 }
 #specificity-graph{
@@ -101,4 +48,15 @@ body {
 }
 #media-queries{
     @include clearfix;
+}
+
+/*---------cssStats-----------*/
+.stat-gallery {
+    @include gallery(4 of 12);
+    background-color: #FFF;
+    text-align: center;
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+    margin-bottom: 2rem;
+    padding: 2rem;
 }

@@ -13,7 +13,7 @@
     // GULP-PLUGINS: CSS
     var sass         = require('gulp-sass'),
         sourcemaps   = require('gulp-sourcemaps'),
-        minifycss    = require('gulp-minify-css'),
+        minifycss    = require('gulp-cssnano'),
         critical     = require('critical'),
         postcss      = require('gulp-postcss'),
         autoprefixer = require('autoprefixer'), // Auto prefix properties when needed
@@ -53,7 +53,6 @@
                             });
                 })
             ],
-        bless = require('gulp-bless'),  // Split css file in multiple files for IE<10 when needed
         sassdoc = require('sassdoc'),
         extras = require('sassdoc-extras');
 
@@ -76,7 +75,8 @@
 
     // GULP-PLUGINS: HTML
     var nunjucksRender = require('gulp-nunjucks-render'),
-        minifyHTML     = require('gulp-minify-html');
+        minifyHTML     = require('gulp-htmlmin'),
+        inject         = require('gulp-inject');
 
     // GULP-PLUGINS: Data - template
     var data = require('gulp-data'),
@@ -93,8 +93,8 @@
             destination : "./build/"
         },
         styleguide : {
-            source : [] ,
-            destination : "./build/styleguide"
+            source : ['./sources/styles/doc-style/style.scss', './sources/styles/sg-style/style.scss'],
+            destination : "./build/styleguide/styles"
         },
         sass       : {
             source : ["./sources/styles/styles.scss"] ,
@@ -111,10 +111,21 @@
         data       : {
             source : "./sources/data/data.json" ,
             destination : "./build/data"
+        },
+        watchFile  : {
+            'html' : ['./sources/patternlab/**{,/**}/*.html'],
+            'scss' : ['./sources/patternlab/**{,/**}/*.scss', './sources/styles/sass/**{,/**}/*.scss']
         }
     };
+    var ports = {
+        site     :8000,
+        test     :8080,
+        coverage :8888,
+        stats    :9090,
+        doc      :9999
+    };
 
-    var mocha = require('gulp-mocha');
+    var mocha    = require('gulp-mocha');
     var istanbul = require('gulp-istanbul')
 
 /**
@@ -187,9 +198,7 @@
             }))
             // Renders template with nunjucks
             .pipe(nunjucksRender())
-            .pipe(minifyHTML({
-                conditionals: true
-            }))
+            .pipe(minifyHTML({collapseWhitespace: true}))
             .pipe(rename({dirname: ''}))
             // output files in app folder
             .pipe(gulp.dest( filePaths.site.destination ));
@@ -218,6 +227,78 @@
             .pipe(sourcemaps.write())
             .pipe(gulp.dest( filePaths.sass.destination ));
     });
+
+    gulp.task('styleguide', function () {
+        // Copy the Favicons
+        gulp.src('./sources/images/favicons/*.png')
+            .pipe(gulp.dest('./build/styleguide/favicons'));
+
+        return gulp.src( filePaths.styleguide.source )
+            .pipe(sass({
+                style: 'expanded',
+                errLogToConsole: true
+            }))
+            .pipe(postcss(processors))
+            .pipe(gulp.dest( filePaths.styleguide.destination ));
+    });
+
+    gulp.task('sg-html', function() {
+
+        // Gets .html and .nunjucks files in pages
+        return gulp.src('sources/patternlab/**/sg/*.html')
+            // Renders template with nunjucks
+            .pipe(nunjucksRender())
+            // output files in app folder
+            .pipe(gulp.dest('build/styleguide/'));
+    });
+
+    // Generates styleguide
+    // styleguide HTML generate
+    gulp.task('sg', ['sg-html', 'styleguide'], function() {
+
+        // gulp.on('stop', function () {
+        //   process.nextTick(function () {
+        //     process.exit(0);
+        //   });
+        // });
+
+        return gulp.src(['./sources/styleguide/index.html'])
+            .pipe(inject(gulp.src(['./build/styleguide/atom/**/*.html']),
+                {
+                    starttag: '<!-- inject:atom:{{ext}} -->',
+                    transform: function(filepath, file) {
+                        var filename = filepath.replace(/^.*[\\\/]/, '').replace(/\..+$/, '');
+                        return '<section id="' + filename + '" class="container sg-container">' + '<h2 class="sg-heading" >' + filename + '</h2>' + file.contents.toString('utf8') + '</section>'
+                    }
+                }))
+            .pipe(inject(gulp.src(['./build/styleguide/molecule/**/*.html']),
+                {
+                    starttag: '<!-- inject:molecule:{{ext}} -->',
+                    transform: function(filepath, file) {
+                        var filename = filepath.replace(/^.*[\\\/]/, '').replace(/\..+$/, '');
+                        return '<section id="' + filename + '" class="container sg-container">' + '<h2 class="sg-heading" >' + filename + '</h2>' + file.contents.toString('utf8') + '</section>'
+                    }
+                }))
+            .pipe(inject(gulp.src(['./build/styleguide/organism/**/*.html']),
+                {
+                    starttag: '<!-- inject:organism:{{ext}} -->',
+                    transform: function(filepath, file) {
+                        var filename = filepath.replace(/^.*[\\\/]/, '').replace(/\..+$/, '');
+                        return '<section id="' + filename + '" class="container sg-container">' + '<h2 class="sg-heading" >' + filename + '</h2>' + file.contents.toString('utf8') + '</section>'
+                    }
+                }))
+            .pipe(inject(gulp.src(['./build/styleguide/**/*.html'], {
+                read: false
+                }), {
+                starttag: '<!-- inject:links -->',
+                transform: function(filepath, file, i, length) {
+                    var filename = filepath.replace(/^.*[\\\/]/, '').replace(/\..+$/, '');
+                    return '<li><a href="#' + filename + '">' + filename + '</a></li>';
+                }
+            }))
+            .pipe(gulp.dest('build/styleguide'));
+    });
+
 
     gulp.task('sassdoc', function () {
         var options = {
@@ -307,7 +388,8 @@
 
 
 /**
-* test npm test != gulp /!\
+* test
+* /!\ npm test != gulp test
 *
 */
     // html => nunjucks specific
@@ -329,7 +411,6 @@
     gulp.task('html-stat', ['styles'], function(){
         // Add css for stats
         gulp.src( './sources/styles/stat-style/style.scss' )
-            .pipe(sourcemaps.init())
             .pipe(sass({
                 style: 'expanded',
                 errLogToConsole: true
@@ -339,7 +420,6 @@
                 suffix: '.min'
             }))
             .pipe(minifycss())
-            .pipe(sourcemaps.write())
             .pipe(gulp.dest( './build/reports/stats/styles' ));
 
         nunjucksRender.nunjucks.configure('./sources/cssStat/');
@@ -431,7 +511,7 @@
             server: {
                 baseDir: 'build/reports/tests/'
             },
-            port: 8080
+            port: ports.test
         });
     });
 
@@ -441,7 +521,7 @@
             server: {
                 baseDir: 'build/reports/coverage/'
             },
-            port: 8888
+            port: ports.coverage
         });
     });
 
@@ -451,7 +531,7 @@
             server: {
                 baseDir: 'build/documentation'
             },
-            port: 9999
+            port: ports.doc
         });
     });
 
@@ -462,7 +542,7 @@
             server: {
                 baseDir: 'build/reports/stats/'
             },
-            port: 8888
+            port: ports.stats
         });
     });
 
@@ -472,14 +552,25 @@
             server: {
                 baseDir: 'build/'
             },
-            port: 8000
+            port: ports.site
         });
+
+        // add browserSync.reload to the tasks array to make
+        // all browsers reload AFTER tasks are complete.
+        gulp.watch( ['./sources/patternlab/{,**/}*.html'], ['html-watch']);
+        gulp.watch( ['./sources/patternlab/**/*.scss', './sources/styles/sass/**/*.scss'], ['css-watch']);
+        gulp.watch( ['./sources/scripts/main.js'], ['js-watch']);
     });
 
 /**
 * watch
 *
 */
+    // Create a task that ensures the tasks are complete before
+    // reloading browsers
+    gulp.task('html-watch', ['html']   , reload);
+    gulp.task('css-watch' , ['styles'] , reload);
+    gulp.task('js-watch'  , ['scripts'], reload);
 
 
 
@@ -495,6 +586,4 @@
 
     gulp.task('default', function() {
         gulp.start('html', 'styles', 'scripts', 'serve');
-        // gulp.start('html-test', 'browserify', 'serveTest');
-        // gulp.start('styles', 'scripts', 'polyfill', 'images', 'html', 'critical', 'serve','watch');
     });

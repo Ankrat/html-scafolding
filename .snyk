@@ -3,16 +3,58 @@ ignore:
     - 'weinre@2.0.0-pre-I0Z7U9OV > express@2.5.11 > qs@0.4.2':
         reason: None given
         expires: '2016-01-02T16:33:02.473Z'
+      'weinre > express > qs':
+        reason: qs will/might be upgraded after vreview
+        expires: '2016-02-05T12:45:45.034Z'
+      'weinre > qs':
+        reason: None given
+        expires: '2016-02-05T12:55:37.197Z'
     - 'browser-sync-ui@0.5.16 > weinre@2.0.0-pre-I0Z7U9OV > express@2.5.11 > qs@0.4.2':
         reason: None given
         expires: '2016-01-02T16:33:02.475Z'
+      'browser-sync-ui > weinre > express > qs':
+        reason: qs will/might be upgraded after vreview
+        expires: '2016-02-05T12:45:45.034Z'
+      'weinre > express > qs':
+        reason: qs will/might be upgraded after vreview
+        expires: '2016-02-05T12:55:37.197Z'
+    - 'browser-sync > browser-sync-ui > weinre > express > qs':
+        reason: qs will/might be upgraded after vreview
+        expires: '2016-02-05T12:45:45.034Z'
+      'browser-sync-ui > weinre > express > qs':
+        reason: qs will/might be upgraded after vreview
+        expires: '2016-02-05T12:55:37.197Z'
+    - 'browser-sync > browser-sync-ui > weinre > express > qs':
+        reason: qs will/might be upgraded after vreview
+        expires: '2016-02-05T12:55:37.197Z'
   'npm:qs:20140806':
     - 'weinre@2.0.0-pre-I0Z7U9OV > express@2.5.11 > qs@0.4.2':
         reason: None given
         expires: '2016-01-02T16:33:02.474Z'
+      'browser-sync-ui > weinre > express > qs':
+        reason: qs will/might be upgraded after vreview
+        expires: '2016-02-05T12:45:45.033Z'
+      'weinre > qs':
+        reason: None given
+        expires: '2016-02-05T12:55:37.197Z'
     - 'browser-sync-ui@0.5.16 > weinre@2.0.0-pre-I0Z7U9OV > express@2.5.11 > qs@0.4.2':
         reason: None given
         expires: '2016-01-02T16:33:02.475Z'
+      'browser-sync > browser-sync-ui > weinre > express > qs':
+        reason: qs will/might be upgraded after vreview
+        expires: '2016-02-05T12:45:45.033Z'
+      'weinre > express > qs':
+        reason: qs will/might be upgraded after vreview
+        expires: '2016-02-05T12:55:37.197Z'
+    - 'weinre > express > qs':
+        reason: qs will/might be upgraded after vreview
+        expires: '2016-02-05T12:45:45.034Z'
+      'browser-sync-ui > weinre > express > qs':
+        reason: qs will/might be upgraded after vreview
+        expires: '2016-02-05T12:55:37.197Z'
+    - 'browser-sync > browser-sync-ui > weinre > express > qs':
+        reason: qs will/might be upgraded after vreview
+        expires: '2016-02-05T12:55:37.197Z'
   'npm:express:20150120':
     - 'weinre@2.0.0-pre-I0Z7U9OV > express@2.5.11':
         reason: None given
@@ -24,16 +66,46 @@ ignore:
     - 'weinre@2.0.0-pre-I0Z7U9OV > express@2.5.11':
         reason: None given
         expires: '2016-01-02T16:33:02.475Z'
+      'weinre > express':
+        reason: Waiting upgrade to express 3.11
+        expires: '2016-02-05T12:55:37.197Z'
     - 'browser-sync-ui@0.5.16 > weinre@2.0.0-pre-I0Z7U9OV > express@2.5.11':
         reason: None given
         expires: '2016-01-02T16:33:02.475Z'
+      'browser-sync-ui > weinre > express':
+        reason: Waiting upgrade to express 3.11
+        expires: '2016-02-05T12:55:37.197Z'
+    - 'browser-sync > browser-sync-ui > weinre > express':
+        reason: Waiting upgrade to express 3.11
+        expires: '2016-02-05T12:55:37.197Z'
   'npm:connect:20130701':
     - 'weinre@2.0.0-pre-I0Z7U9OV > express@2.5.11 > connect@1.9.2':
         reason: None given
         expires: '2016-01-02T16:33:02.475Z'
+      'weinre > express > connect':
+        reason: Waiting upgrade to express 3.11
+        expires: '2016-02-05T12:45:45.034Z'
+      'weinre > connect':
+        reason: None given
+        expires: '2016-02-05T12:55:37.195Z'
     - 'browser-sync-ui@0.5.16 > weinre@2.0.0-pre-I0Z7U9OV > express@2.5.11 > connect@1.9.2':
         reason: None given
         expires: '2016-01-02T16:33:02.475Z'
+      'browser-sync-ui > weinre > express > connect':
+        reason: Waiting upgrade to express 3.11
+        expires: '2016-02-05T12:45:45.034Z'
+      'weinre > express > connect':
+        reason: Waiting upgrade to express 3.11
+        expires: '2016-02-05T12:55:37.196Z'
+    - 'browser-sync > browser-sync-ui > weinre > express > connect':
+        reason: Waiting upgrade to express 3.11
+        expires: '2016-02-05T12:45:45.034Z'
+      'browser-sync-ui > weinre > express > connect':
+        reason: Waiting upgrade to express 3.11
+        expires: '2016-02-05T12:55:37.197Z'
+    - 'browser-sync > browser-sync-ui > weinre > express > connect':
+        reason: Waiting upgrade to express 3.11
+        expires: '2016-02-05T12:55:37.197Z'
 patch:
   'npm:uglify-js:20151024':
     - 'ruglify@1.0.0 > uglify-js@2.2.5':
@@ -41,4 +113,7 @@ patch:
   'npm:uglify-js:20150824':
     - 'ruglify@1.0.0 > uglify-js@2.2.5':
         patched: '2015-12-04T16:27:48.124Z'
+  'npm:handlebars:20151207':
+    - 'sprity > handlebars':
+        patched: '2016-01-06T12:55:37.209Z'
 version: v1

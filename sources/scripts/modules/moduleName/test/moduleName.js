@@ -9,12 +9,12 @@ describe('test setup', function() {
   });
 });
 
-describe('moduleName', function() {
+// describe('moduleName', function() {
 
-    process.env.dev = true;
-    var moduleName = require('../moduleName.js');
+//     process.env.dev = true;
+//     var moduleName = require('../moduleName.js');
 
-    it('Navigation properties Existence:', function(){
-        expect(moduleName).to.exist;
-    });
-});
+//     it('Navigation properties Existence:', function(){
+//         expect(moduleName).to.exist;
+//     });
+// });

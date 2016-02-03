@@ -1,0 +1,33 @@
+{% extends "styleguide_base.html" %}
+{% block page_title %}{% endblock %}
+{% block head %}{% endblock %}
+{% block javascripts %} {% endblock %}
+{% block content %}
+
+
+
+<p class="box_notice">Blackwell Bold (font secondary bold) is already bold, don't embed it in &lt;Hx&gt;, &lt;strong&gt; or &lt;b&gt; tag without setting the <code>font-weight:normal</code></p>
+
+<section class="sg-elem-variant">
+    <p>Primary font: "opensans", "Arial", sans-serif;</p>
+    <p><em>Primary font italic: "opensans", "Arial", sans-serif;</em></p>
+    <p><strong>Primary font bold: "opensans", "Arial", sans-serif;</strong></p>
+    <p><strong><em>Primary font bold italic: sans-serif, Helvetica, Arial;</em></strong></p>
+</section>
+
+<section class="sg-elem-variant">
+    <p class="sg-font-secondary">Secondary font: "blackwell", Georgia, Times, "Times New Roman", serif;</p>
+    <p class="sg-font-secondary"><em>Secondary font italic: "blackwell", Georgia, Times, "Times New Roman", serif</em></p>
+    <p class="sg-font-secondary--bold"><strong>Secondary font bold: "blackwellBold", Georgia, Times, "Times New Roman", serif;</strong></p>
+    <p class="sg-font-secondary--bold"><strong><em>Secondary font bold italic: "blackwellBold", Georgia, Times, "Times New Roman", serif;</em></strong></p>
+</section>
+
+<section class="sg-elem-variant">
+    <p class="sg-font-alt">Alternate font: "ampersand"</p>
+    <p class="sg-font-alt"><em>Alternate font italic: "ampersand"</em></p>
+    <p class="sg-font-alt"><strong>Alternate font bold: "ampersand"</strong></p>
+    <p class="sg-font-alt"><strong><em>Alternate font bold italic: "ampersand"</em></strong></p>
+</section>
+
+
+{% endblock %}

@@ -56,49 +56,18 @@ body {
     color: $grey;
 }
 
-/*---------cssStats-----------*/
-#top-stats{
-    @include clearfix;
-     .stat-gallery {
-        @include gallery(3 of 12);
+#toc{
+    list-style: none;
+    @include rem(font-size, 2rem);
+    a{
+        color: $color__primaryAction;
+        text-decoration: none;
+        &::first-letter{
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        &:hover{
+            border-bottom: 1px solid $color__primaryAction;
+        }
     }
-}
-#declarations{
-    @include clearfix;
-     .stat-gallery {
-        @include gallery(2 of 12);
-    }
-}
-#unique-colors{
-    @include clearfix;
-     .stat-gallery {
-        @include gallery(4 of 12);
-    }
-}
-#unique-background-colors{
-    @include clearfix;
-    .stat-gallery {
-        @include gallery(4 of 12);
-    }
-}
-#unique-font-sizes{
-    @include clearfix;
-}
-#unique-font-families{
-    @include clearfix;
-}
-#unique-totals{
-    @include clearfix;
-    .stat-gallery {
-        @include gallery(2 of 12);
-    }
-}
-#specificity-graph{
-    @include clearfix;
-}
-#rulesize-graph{
-    @include clearfix;
-}
-#media-queries{
-    @include clearfix;
 }

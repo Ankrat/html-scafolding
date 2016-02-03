@@ -41,7 +41,7 @@
 @import "./node_modules/susy/sass/susy";
 
 /// @ignore $NORMALIZE
-@import "generic/normalize";
+// @import "generic/normalize";
 
 /// @ignore $GLOBAL ELEMENTS
 @import "generic/global-classes";
@@ -59,4 +59,4 @@
 /// @ignore @import "../patternlab/organism/PATH/TO/_ORGANISM";
 
 /// @ignore  $PRINT STYLE
-@import "layout/print";
+// @import "layout/print";

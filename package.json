@@ -53,5 +53,8 @@
   "scripts": {
     "test": "snyk test"
   },
-  "snyk": true
+  "snyk": true,
+  "devDependencies": {
+    "require-dir": "^0.3.0"
+  }
 }

@@ -49,7 +49,7 @@
                     // Copy in sources for nunjucks to use
                     fs.writeFile('./sources/cssStat/statsData.json', JSON.stringify(projStat(stats)), function (err) {
                               if (err) throw err;
-                              console.log('It\'s saved!');
+                              console.log('New stats data is saved!');
                             });
                 })
             ],
@@ -89,7 +89,7 @@
 
     var filePaths = {
         site       : {
-            source : ["./sources/patternlab/to_build_pages/*.html"] ,
+            source : ["./sources/patternlab/page/*.html"] ,
             destination : "./build/"
         },
         styleguide : {

@@ -1,0 +1,52 @@
+HTML
+Generate HTML pages from patternlab
+Insert fixture and page specific fixtures
+
+DATA
+Generate data from json for fixture
+
+STYLE
+Generate style.min.css for the website from patternlab/.scss
+Or include all directive_*.scss into a style.scss?
+
+JS
+lint all javascripts files
+browserify with third party and polyfill
+
+STYLEGUIDE
+Generate HTML for patternlab element
+Use generated style of the site for elements
+Generate specific style for styleguide doc and navigation ==> Common style across diver doc
+
+SASSDOC //sassdoc module
+Generate HTML for mixins and functions
+Generate specific style for doc and navigation ==> Common style across diver doc
+
+JSDOC //jsdoc module
+Generate HTML for modules element
+Generate specific style for doc and navigation ==> Common style across diver doc
+
+CSSSTATS
+Generate HTML to display stats
+Generate specific style for doc and navigation ==> Common style across diver doc
+
+JSTEST
+Generate HTML for js test
+Generate specific style for doc and navigation ==> Common style across diver doc
+
+JSCOVERAGE
+Generate HTML for js test coverage
+Generate specific style for doc and navigation ==> Common style across diver doc
+
+COPYASSETS
+Move all assets from sources to static (img, fonts, favicon...)
+
+CLEAN-xxx
+Where xxx corespond to site/jsdoc/sassdoc/styleguide...
+
+DEFAULT
+Build website only HTML/CSS/JS  + STYLEGUIDE => no-test...
+
+SERVE-xxx
+Where xxx corespond to site/jsdoc/sassdoc/styleguide...
+Build the relative component and serve it on a specific port if possible (multiple localhost...)

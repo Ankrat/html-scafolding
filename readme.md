@@ -14,9 +14,9 @@
 
     Gulp task manager
 
-## Tasks
+## Specific tasks
 
-- *sprites*:
+### `sprites` :
 
  Generate sprite.png and _sprite.scss
 
@@ -24,7 +24,7 @@
     $ gulp sprites
     ```
 
-- *html*:
+### `html` :
 
  Build pages from patternlab
 
@@ -34,7 +34,7 @@
     $ gulp html
     ```
 
-- *styles*:
+### `styles` :
 
  Build style.css from `sources/styles/style.scss`
 
@@ -44,7 +44,7 @@
     $ gulp styles
     ```
 
-- *styleguide*:
+### `styleguide` :
 
  Build the visual style of each patternlab
 
@@ -52,7 +52,7 @@
     $ gulp styleguide
     ```
 
-- *sg-html*:
+### `sg-html` :
 
  Build the `index.html` by injecting the html of each components
 
@@ -60,7 +60,7 @@
     $ gulp sg-html
     ```
 
-- *sg*:
+### `sg` :
 
  Aliase which run `styleguide` then `sg-html` gulp tasks
 
@@ -68,7 +68,7 @@
     $ gulp sg
     ```
 
-- *sassdoc*:
+### `sassdoc` :
 
  Build documentation for sass mixins and functions
 
@@ -76,7 +76,7 @@
     $ gulp sassdoc
     ```
 
-- *lint-js*:
+### `lint-js` :
 
  Lint the js modules
 
@@ -84,7 +84,7 @@
     $ gulp lint-js
     ```
 
-- *browserify-js*:
+### `browserify-js` :
 
  Bundle the js
 
@@ -92,7 +92,7 @@
     $ gulp browserify-js
     ```
 
-- *scripts*:
+### `scripts` :
 
  Bundle and minify the thirdparty and modules
 
@@ -100,7 +100,7 @@
     $ gulp scripts
     ```
 
-- *doc*:
+### `doc` :
 
  Build documentation for js modules
 
@@ -108,7 +108,7 @@
     $ gulp doc
     ```
 
-- *html-test*:
+### `html-test` :
 
  Generate the html to run js tests
 
@@ -116,7 +116,7 @@
     $ gulp html-test
     ```
 
-- *html-stat*:
+### `html-stat` :
 
  Generate the html to run/display css stat
 
@@ -124,7 +124,7 @@
     $ gulp html-stat
     ```
 
-- *browserify-stat*:
+### `browserify-stat` :
 
  Bundle javascript for css stats (charts creation)
 
@@ -132,7 +132,7 @@
     $ gulp browserify-stat
     ```
 
-- *browserify-test*:
+### `browserify-test` :
 
  Bundle js for tests runner and library
 
@@ -144,7 +144,7 @@
  TODO: Issues with `gbrowserify` when more than 1 module?!
  ```
 
-- *pre-test cover-js*:
+### `pre-test cover-js` :
 
  Generate test coverage report
 
@@ -157,37 +157,37 @@
     ```
 
 
-**Serve tasks**
+## Serve tasks
 
-- *serveTest*:
+### `serveTest` :
 
 
     ```
     $ gulp serveTest
     ```
 
-- *serveCoverage*:
+### `serveCoverage` :
 
 
     ```
     $ gulp serveCoverage
     ```
 
-- *serveDoc*:
+### `serveDoc` :
 
 
     ```
     $ gulp serveDoc
     ```
 
-- *serveStat*:
+### `serveStat` :
 
 
     ```
     $ gulp serveStat
     ```
 
-- *serve*:
+### `serve` :
 
 
     ```
@@ -195,32 +195,32 @@
     ```
 
 
-**Watch tasks**
+## Watch tasks
 
-- *html-watch*:
+### `html-watch` :
 
 
     ```
     $ gulp html-watch
     ```
 
-- *css-watch*:
+### `css-watch` :
 
 
     ```
     $ gulp css-watch
     ```
 
-- *js-watch*:
+### `js-watch` :
 
 
     ```
     $ gulp js-watch
     ```
 
-- *default*:
+### `default` :
 
 
     ```
-    $ gulp default
+    $ gulp
     ```

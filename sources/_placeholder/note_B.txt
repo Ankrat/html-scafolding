@@ -1,0 +1,12 @@
+styledoc + theme
+
+common => styledoc
+    fonts
+    colors
+    default-style
+    favicon
+
+specific => theme
+    navigation
+    footnotes
+    ...
